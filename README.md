@@ -1,7 +1,7 @@
 # MesHeures
+Outil simple, rapide et professionnel pour le suivi hebdomadaire des heures de travail.
 
-**MesHeures** est une application web légère et intuitive conçue pour les artisans et les employés souhaitant gérer leurs feuilles d'heures par client et par projet, directement depuis leur navigateur.
-
+**MesHeures** est une application web conçue pour les artisans et les employés souhaitant gérer leurs feuilles d’heures par client et par projet, directement depuis leur navigateur.
 **Accéder à l'application :** [https://smims909.github.io/MesHeures/](https://smims909.github.io/MesHeures/)
 
 ---
