@@ -1,0 +1,2381 @@
+<!DOCTYPE html>
+<!-- AppGenerique v1.0 — smims909 — github.io -->
+
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#FFFFFF">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="description" content="Application de saisie des heures hebdomadaires — exports Excel, gestion km, repas et frais.">
+    <meta name="robots" content="noindex, nofollow">
+    <meta property="og:title" content="MesHeures">
+    <meta property="og:description" content="Application mobile de gestion des heures de travail.">
+    <meta property="og:type" content="website">
+    <title>MesHeures</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Inter:wght@700;800;900&family=Questrial&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F5F5F5;
+            padding-bottom: 200px;
+            font-size: 16px;
+            color: #000;
+        }
+
+        /* HEADER */
+        .header {
+            background: white;
+            border-bottom: 1px solid #E5E5E5;
+            padding: 40px 20px 16px 20px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .logo-container { text-align: center; margin-bottom: 16px; }
+
+        .header input {
+            width: 100%;
+            background: #F8F8F8;
+            border: 1px solid #E5E5E5;
+            color: #000;
+            padding: 12px;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 10px;
+        }
+        .header input::placeholder { color: #8E8E93; }
+        .header input:focus { outline: none; border-color: #FD636B; background: white; }
+
+        /* NAVIGATION SEMAINE */
+        .week-nav {
+            background: white;
+            padding: 14px 20px 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: none;
+            margin-bottom: 0;
+        }
+
+        .week-nav button {
+            background: transparent;
+            color: #FD636B;
+            border: none;
+            padding: 8px 16px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .week-nav button:active { opacity: 0.5; }
+
+        .week-date { font-weight: 700; font-size: 17px; color: #000; }
+
+        /* RACCOURCIS JOURS */
+        .day-shortcuts {
+            background: white;
+            padding: 8px 12px 14px 12px;
+            display: flex;
+            justify-content: space-between;
+            gap: 6px;
+            border-bottom: 1px solid #E5E5E5;
+            margin-bottom: 12px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .day-shortcut {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 6px 4px;
+            border-radius: 8px;
+            cursor: pointer;
+            background: transparent;
+            border: none;
+            font-family: 'Nunito', sans-serif;
+            transition: background 0.15s;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        .day-shortcut:active { background: #F5F5F5; }
+
+        .day-shortcut .sc-label {
+            font-size: 11px;
+            font-weight: 700;
+            color: #8E8E93;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .day-shortcut .sc-num {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-top: 1px;
+        }
+
+        .day-shortcut.sc-today .sc-label,
+        .day-shortcut.sc-today .sc-num {
+            color: #FD636B;
+        }
+
+        .day-shortcut.sc-today .sc-num {
+            background: #FD636B;
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+        }
+
+        /* CARTES JOUR */
+        .day-card {
+            background: white;
+            margin: 0 12px 12px 12px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .day-title {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 16px;
+            border-bottom: 1px solid #F0F0F0;
+            background: #FAFAFA;
+        }
+
+        .day-name { font-size: 18px; font-weight: 600; color: #FD636B; }
+        .day-date { font-size: 13px; color: #666; font-weight: 500; }
+
+        /* PÉRIODES */
+        .period-section {
+            background: white;
+            padding: 14px 16px;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        .period-section:last-of-type { border-bottom: none; }
+
+        .period-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FD636B;
+            display: flex;
+            align-items: center;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 10px;
+        }
+
+        /* CLIENT ROW */
+        .client-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 10px;
+            align-items: center;
+        }
+
+        .client-row input[type="text"] {
+            flex: 1;
+            margin-bottom: 0;
+        }
+
+        .desc-row, .location-row {
+            display: flex;
+            gap: 6px;
+            margin-bottom: 12px;
+            align-items: center;
+        }
+
+        .desc-row input, .location-row input {
+            flex: 1;
+            margin-bottom: 0;
+            height: 44px;
+        }
+
+        /* AUTOCOMPLETE LIEU */
+        .lieu-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        .lieu-wrapper input {
+            width: 100%;
+            margin-bottom: 0;
+            height: 44px;
+        }
+        .lieu-suggestions {
+            display: none;
+            position: absolute;
+            top: calc(100% + 4px);
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            z-index: 200;
+            overflow: hidden;
+        }
+        .lieu-suggestions.visible { display: block; }
+        .lieu-suggestion-item {
+            padding: 13px 16px;
+            font-size: 15px;
+            font-family: 'Nunito', sans-serif;
+            color: #222;
+            cursor: pointer;
+            border-bottom: 1px solid #F5F5F5;
+        }
+        .lieu-suggestion-item:last-child { border-bottom: none; }
+        .lieu-suggestion-item.highlighted {
+            background: #F0EFFF;
+            color: #6967CE;
+            font-weight: 700;
+        }
+
+        .copy-btn-small {
+            padding: 12px 14px;
+            background: #F0F0F0;
+            border: none;
+            border-radius: 8px;
+            color: #FD636B;
+            font-size: 11px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .copy-btn-small span {
+            color: #666;
+            font-size: 10px;
+            font-weight: 400;
+        }
+
+        .copy-btn-small:active { background: #E5E5E5; }
+
+        .client-entry {
+            padding: 12px 0;
+            border-top: 1px solid #F5F5F5;
+        }
+
+        .client-entry .hours-display {
+            margin-top: 8px;
+            background: linear-gradient(135deg, #3AE8B0 0%, #19AFD0 100%);
+        }
+
+        /* CLIENT */
+        .client-select-container {
+            position: relative;
+            margin-bottom: 12px;
+        }
+
+        .client-select-container select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #F8F8F8;
+        }
+        .client-select-container select:focus { outline: none; border-color: #FD636B; background: white; }
+
+        /* TEMPS */
+        .time-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .time-group label {
+            font-size: 12px;
+            color: #8E8E93;
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        input[type="time"] {
+            width: 100%;
+            padding: 12px 14px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 16px;
+            background: #F8F8F8;
+            color: #000;
+            font-weight: 500;
+            text-align: center;
+            caret-color: transparent;
+            -webkit-user-select: none;
+            -moz-user-select: none;
+            user-select: none;
+            pointer-events: auto;
+        }
+
+
+        input[type="time"]:read-only {
+            background: #F8F8F8;
+            color: #000;
+            opacity: 1;
+            -webkit-text-fill-color: #000;
+        }
+
+        input[type="time"]:focus {
+            outline: none;
+            border-color: #FD636B;
+            background: white;
+        }
+
+
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="%236967CE" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>') center/contain no-repeat;
+            cursor: pointer;
+            width: 20px;
+            height: 20px;
+            position: absolute;
+            right: 12px;
+        }
+
+        input[type="time"]::-webkit-datetime-edit-hour-field,
+        input[type="time"]::-webkit-datetime-edit-minute-field {
+            padding: 2px;
+            background: transparent;
+            color: #000;
+        }
+
+        input[type="time"]::-webkit-datetime-edit-text {
+            padding: 0 2px;
+            color: #8E8E93;
+        }
+
+
+        /* INPUTS */
+        input[type="text"], input[type="number"], textarea, select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 15px;
+            margin-bottom: 12px;
+            background: #F8F8F8;
+            font-family: inherit;
+        }
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: #FD636B;
+            background: white;
+        }
+
+        /* HEURES */
+        .hours-display {
+            background: linear-gradient(135deg, #FFB900 0%, #e0a500 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            text-align: center;
+            font-size: 16px;
+            font-weight: 600;
+            margin-top: 8px;
+            box-shadow: 0 2px 6px rgba(255, 185, 0, 0.25);
+        }
+
+        /* KM */
+        .km-row {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        /* REPAS */
+        .meal-checkbox {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #F8F8F8;
+            border-radius: 10px;
+            margin-bottom: 0;
+            min-height: 44px;
+        }
+
+        .meal-checkbox input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            accent-color: #FD636B;
+            flex-shrink: 0;
+            margin: 0;
+        }
+
+        .meal-checkbox label {
+            flex: 1;
+            font-size: 14px;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        /* FRAIS */
+        .expenses-section {
+            background: white;
+            padding: 8px 16px;
+            border-top: 1px solid #F0F0F0;
+        }
+
+        .expenses-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FD636B;
+            margin-bottom: 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .add-expense-btn {
+            color: #FD636B;
+            font-size: 24px;
+            font-weight: 300;
+            cursor: pointer;
+            flex-shrink: 0;
+            user-select: none;
+            -webkit-user-select: none;
+        }
+        .add-expense-btn:active { opacity: 0.4; }
+
+        .expense-item { display: grid; grid-template-columns: 2fr 1fr auto; gap: 8px; margin-top: 8px; margin-bottom: 4px; align-items: center; }
+        .expense-item.hidden { display: none; }
+
+        .expense-item input {
+            margin-bottom: 0;
+            padding: 10px 12px;
+            height: 40px;
+        }
+
+        .expense-item input[type="number"] {
+            text-align: right;
+        }
+
+        .remove-expense-btn {
+            background: #FD636B;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 14px;
+            font-size: 18px;
+            font-weight: 300;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-appearance: none;
+            appearance: none;
+            padding: 0;
+            flex-shrink: 0;
+        }
+
+        /* TOTAUX */
+        .weekly-total {
+            background: white;
+            margin: 12px;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .weekly-total h3 {
+            font-size: 14px;
+            color: #8E8E93;
+            margin-bottom: 8px;
+        }
+
+        .weekly-total .total {
+            font-size: 32px;
+            font-weight: 700;
+            color: #FD636B;
+        }
+
+        /* FOOTER */
+        .summary-footer {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid #E5E5E5;
+            padding: 12px;
+            z-index: 100;
+            box-shadow: 0 -2px 8px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .summary-footer.hidden {
+            transform: translateY(100%);
+        }
+
+        /* SECTIONS D'INFORMATIONS */
+        .info-section {
+            background: white;
+            margin: 12px;
+            padding: 16px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .info-section label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #FD636B;
+            margin-bottom: 10px;
+        }
+
+        .info-section textarea {
+            width: 100%;
+            min-height: 120px;
+            padding: 12px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #F8F8F8;
+            resize: vertical;
+        }
+
+        .info-section textarea:focus {
+            outline: none;
+            border-color: #FD636B;
+            background: white;
+        }
+
+        .info-section input[type="email"],
+        .info-section input[type="text"],
+        .info-section input[type="tel"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #E5E5E5;
+            border-radius: 10px;
+            font-size: 15px;
+            background: #F8F8F8;
+            height: 44px;
+            box-sizing: border-box;
+        }
+
+        .info-section input:focus {
+            outline: none;
+            border-color: #FD636B;
+            background: white;
+        }
+
+        .personal-info-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+        }
+
+        .personal-info-grid input:nth-child(3),
+        .personal-info-grid input:nth-child(8) {
+            grid-column: 1 / -1;
+        }
+
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 6px;
+            margin-bottom: 8px;
+        }
+
+        .summary-item {
+            text-align: center;
+            padding: 8px 4px;
+            background: white;
+            border-radius: 8px;
+            border: 1px solid #E5E5E5;
+        }
+
+        .summary-item .label {
+            font-size: 9px;
+            color: #8E8E93;
+            font-weight: 600;
+            margin-bottom: 2px;
+            text-transform: uppercase;
+        }
+
+        .summary-item .value {
+            font-size: 14px;
+            font-weight: 700;
+            color: #000;
+        }
+
+        .action-buttons {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+            gap: 6px;
+        }
+
+        .action-btn {
+            padding: 10px;
+            border: none;
+            border-radius: 8px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            color: white;
+        }
+
+        .btn-save {
+            background: linear-gradient(135deg, #3AE8B0 0%, #19AFD0 100%);
+            box-shadow: 0 2px 6px rgba(58, 232, 176, 0.3);
+        }
+
+        .btn-export {
+            background: linear-gradient(135deg, #19AFD0 0%, #0d9ab8 100%);
+            box-shadow: 0 2px 6px rgba(25, 175, 208, 0.25);
+        }
+
+        .btn-clear {
+            background: linear-gradient(135deg, #FD636B 0%, #e5535a 100%);
+            box-shadow: 0 2px 6px rgba(253, 99, 107, 0.25);
+        }
+
+        .btn-pdf {
+            background: linear-gradient(135deg, #9B59B6 0%, #6967CE 100%);
+            box-shadow: 0 2px 6px rgba(105, 103, 206, 0.25);
+        }
+
+        .action-btn:active { transform: scale(0.97); }
+
+        /* BOUTONS CLIENT */
+        .copy-morning-btn {
+            padding: 8px 12px;
+            background: #F0F0F0;
+            border: none;
+            border-radius: 8px;
+            color: #FD636B;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .copy-morning-btn:active { background: #E5E5E5; }
+
+        .add-client-btn {
+            width: 32px;
+            height: 32px;
+            border-radius: 16px;
+            background: #FD636B;
+            color: white;
+            border: none;
+            font-size: 20px;
+            font-weight: 300;
+            cursor: pointer;
+            flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            -webkit-appearance: none;
+            appearance: none;
+            padding: 0;
+        }
+        .add-client-btn:active { opacity: 0.7; }
+
+        /* Bouton ajouter client discret en bas */
+        .add-client-line-btn {
+            width: 100%;
+            padding: 10px;
+            margin-top: 12px;
+            margin-bottom: 4px;
+            background: transparent;
+            border: 1px dashed #E5E5E5;
+            border-radius: 8px;
+            color: #8E8E93;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 4px;
+            line-height: 1;
+            -webkit-appearance: none;
+            appearance: none;
+        }
+
+        .add-client-line-btn span {
+            color: #FD636B;
+            font-size: 18px;
+            font-weight: 400;
+            line-height: 1;
+            display: flex;
+            align-items: center;
+        }
+
+        .add-client-line-btn:active {
+            background: #F8F8F8;
+            border-color: #FD636B;
+        }
+
+        /* CALENDRIER */
+        .calendar-section {
+            background: white;
+            margin: 12px;
+            padding: 14px;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        .calendar-header {
+            font-size: 14px;
+            font-weight: 600;
+            color: #000;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 4px;
+        }
+
+        .calendar-day-label {
+            text-align: center;
+            font-size: 10px;
+            color: #8E8E93;
+            font-weight: 600;
+            padding: 4px 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #000;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .calendar-day.other-month { color: #C7C7CC; }
+        .calendar-day.today::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            width: 4px;
+            height: 4px;
+            background: #000;
+            border-radius: 50%;
+        }
+
+        .calendar-day.has-hours::after {
+            content: '';
+            position: absolute;
+            bottom: 2px;
+            width: 4px;
+            height: 4px;
+            background: #6967CE;
+            border-radius: 50%;
+        }
+
+        .calendar-day.today.has-hours::after {
+            box-shadow: 0 0 0 1px #000;
+        }
+
+        .calendar-day:active { opacity: 0.6; }
+
+        /* TIME PICKER PERSONNALISÉ */
+        .time-picker-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .time-picker-modal {
+            background: #F0F0F0;
+            border-radius: 16px;
+            width: 90%;
+            max-width: 320px;
+            overflow: hidden;
+        }
+
+        .time-picker-header {
+            background: #E0E0E0;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .time-picker-header span {
+            font-size: 42px;
+            font-weight: 300;
+            color: #222222;
+            letter-spacing: 3px;
+        }
+
+        .time-picker-mode {
+            display: flex;
+            background: #E0E0E0;
+            padding: 0 12px 12px 12px;
+            gap: 8px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 10px;
+            background: transparent;
+            border: 1px solid #C8C8C8;
+            color: #8E8E93;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .mode-btn.active {
+            background: #FD636B;
+            border-color: #FD636B;
+            color: white;
+        }
+
+        .time-picker-body {
+            padding: 20px 12px;
+            background: #F0F0F0;
+        }
+
+        .time-grid {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .time-number {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #E0E0E0;
+            border: 1px solid #C8C8C8;
+            border-radius: 8px;
+            color: #333333;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .time-number:active {
+            background: #D0D0D0;
+        }
+
+        .time-number.selected {
+            background: #FD636B;
+            border-color: #FD636B;
+            color: white;
+        }
+
+        .time-picker-actions {
+            display: flex;
+            border-top: 1px solid #C8C8C8;
+        }
+
+        .time-picker-actions button {
+            flex: 1;
+            padding: 16px;
+            border: none;
+            background: transparent;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .time-btn-cancel {
+            color: #8E8E93;
+            border-right: 1px solid #C8C8C8;
+        }
+
+        .time-btn-ok {
+            color: #FD636B;
+        }
+
+        .time-btn-cancel:active {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .time-btn-ok:active {
+            background: rgba(216, 69, 69, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <div class="logo-container">
+            <input type="text" id="companyName" placeholder="Entreprise" style="font-family:'Questrial',sans-serif;font-size:36px;font-weight:700;color:#000000;letter-spacing:1px;text-align:center;background:transparent;border:none;padding:4px 0;margin-bottom:0;width:100%;outline:none;" oninput="saveCompanyName()" />
+        </div>
+        <input type="text" id="employeeName" placeholder="Nom complet" />
+    </div>
+
+    <div class="week-nav">
+        <button onclick="changeWeek(-1)">← Préc.</button>
+        <div class="week-date" id="weekDisplay"></div>
+        <button onclick="changeWeek(1)">Suiv. →</button>
+    </div>
+
+    <div class="day-shortcuts" id="dayShortcuts"></div>
+
+    <div id="daysContainer"></div>
+
+    <div class="weekly-total">
+        <h3>TOTAL HEURES SEMAINE</h3>
+        <div class="total" id="weeklyTotal">0h00</div>
+    </div>
+
+    <div class="calendar-section">
+        <div class="calendar-header" id="calendarHeader"></div>
+        <div class="calendar-grid" id="calendarGrid"></div>
+    </div>
+
+    <div class="summary-footer">
+        <div class="summary-grid">
+            <div class="summary-item">
+                <div class="label">Heures</div>
+                <div class="value" id="weekHours">0h</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">KM</div>
+                <div class="value" id="weekKm">0</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">Repas</div>
+                <div class="value" id="weekMeals">0</div>
+            </div>
+            <div class="summary-item">
+                <div class="label">Frais</div>
+                <div class="value" id="weekExpenses">0</div>
+            </div>
+        </div>
+        <div class="action-buttons">
+            <button class="action-btn btn-save" onclick="saveData()">Sauver</button>
+            <button class="action-btn btn-export" onclick="exportToExcel()">Excel</button>
+            <button class="action-btn btn-pdf" onclick="exportToPDF()">PDF</button>
+            <button class="action-btn btn-clear" onclick="clearWeek()">Effacer</button>
+        </div>
+    </div>
+
+    <!-- Note / Informations complémentaires -->
+    <div class="info-section">
+        <label>Informations complémentaires</label>
+        <textarea id="notes" placeholder="Ajoutez vos notes, suggestions ou informations complémentaires ici..." onchange="saveAllData();"></textarea>
+    </div>
+
+    <!-- Informations personnelles -->
+    <div class="info-section">
+        <label>Informations personnelles</label>
+        <div class="personal-info-grid">
+            <input type="text" id="firstName" placeholder="Prénom" onchange="saveAllData();" />
+            <input type="text" id="lastName" placeholder="Nom" onchange="saveAllData();" />
+            <input type="text" id="address" placeholder="Adresse" onchange="saveAllData();" />
+            <input type="text" id="city" placeholder="Ville" onchange="saveAllData();" />
+            <input type="text" id="postalCode" placeholder="Code postal" onchange="saveAllData();" />
+            <input type="text" id="country" placeholder="Pays" onchange="saveAllData();" />
+            <input type="tel" id="phone" placeholder="Téléphone" onchange="saveAllData();" />
+            <input type="email" id="personalEmail" placeholder="Email" onchange="saveAllData();" />
+        </div>
+    </div>
+
+    <!-- Time Picker Personnalisé -->
+    <div id="customTimePicker" class="time-picker-overlay" style="display: none;">
+        <div class="time-picker-modal">
+            <div class="time-picker-header">
+                <span id="pickerDisplay">00:00</span>
+            </div>
+            <div class="time-picker-mode">
+                <button class="mode-btn active" id="modeHour" onclick="switchMode('hour')">Heures</button>
+                <button class="mode-btn" id="modeMinute" onclick="switchMode('minute')">Minutes</button>
+            </div>
+            <div class="time-picker-body">
+                <div class="time-grid" id="hourGrid"></div>
+                <div class="time-grid" id="minuteGrid" style="display: none;"></div>
+            </div>
+            <div class="time-picker-actions">
+                <button class="time-btn-cancel" onclick="closeTimePicker()">Annuler</button>
+                <button class="time-btn-ok" onclick="confirmTime()">OK</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.18.5/xlsx.full.min.js"></script>
+
+    <script>
+        const daysOfWeek = ['Dimanche', 'Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+        const monthNames = ['Janvier', 'Février', 'Mars', 'Avril', 'Mai', 'Juin', 'Juillet', 'Août', 'Septembre', 'Octobre', 'Novembre', 'Décembre'];
+        const dayLabels = ['D', 'L', 'M', 'M', 'J', 'V', 'S'];
+
+        let currentWeekStart = new Date();
+        currentWeekStart.setDate(currentWeekStart.getDate() - currentWeekStart.getDay() + 1); // Lundi
+
+        let currentTimeInput = null;
+        let selectedHour = 0;
+        let selectedMinute = 0;
+        let currentMode = 'hour';
+
+        function openCustomTimePicker(input) {
+            currentTimeInput = input;
+            const currentValue = input.value;
+
+            if (currentValue && currentValue !== '--:--') {
+                const [h, m] = currentValue.split(':');
+                selectedHour = parseInt(h);
+                selectedMinute = parseInt(m);
+            } else {
+                const now = new Date();
+                selectedHour = now.getHours();
+                selectedMinute = Math.round(now.getMinutes() / 5) * 5;
+                if (selectedMinute >= 60) selectedMinute = 55;
+            }
+
+            initPicker();
+            updateTimeDisplay();
+            document.getElementById('customTimePicker').style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function initPicker() {
+            const hourGrid = document.getElementById('hourGrid');
+            const minuteGrid = document.getElementById('minuteGrid');
+
+            hourGrid.innerHTML = '';
+            minuteGrid.innerHTML = '';
+
+            // Grille heures (0-23)
+            for (let i = 0; i < 24; i++) {
+                const btn = document.createElement('div');
+                btn.className = 'time-number' + (i === selectedHour ? ' selected' : '');
+                btn.textContent = String(i).padStart(2, '0');
+                btn.onclick = () => selectHour(i);
+                hourGrid.appendChild(btn);
+            }
+
+            // Grille minutes (0, 5, 10... 55)
+            for (let i = 0; i < 60; i += 5) {
+                const btn = document.createElement('div');
+                btn.className = 'time-number' + (i === selectedMinute ? ' selected' : '');
+                btn.textContent = String(i).padStart(2, '0');
+                btn.onclick = () => selectMinute(i);
+                minuteGrid.appendChild(btn);
+            }
+
+            // Afficher heures par défaut
+            switchMode('hour');
+        }
+
+        function switchMode(mode) {
+            currentMode = mode;
+            document.getElementById('modeHour').classList.toggle('active', mode === 'hour');
+            document.getElementById('modeMinute').classList.toggle('active', mode === 'minute');
+            document.getElementById('hourGrid').style.display = mode === 'hour' ? 'grid' : 'none';
+            document.getElementById('minuteGrid').style.display = mode === 'minute' ? 'grid' : 'none';
+        }
+
+        function selectHour(h) {
+            selectedHour = h;
+            updateTimeDisplay();
+
+            // Mettre à jour visuellement
+            document.querySelectorAll('#hourGrid .time-number').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === h);
+            });
+
+            // Passer aux minutes automatiquement
+            setTimeout(() => switchMode('minute'), 200);
+        }
+
+        function selectMinute(m) {
+            selectedMinute = m;
+            updateTimeDisplay();
+
+            // Mettre à jour visuellement
+            document.querySelectorAll('#minuteGrid .time-number').forEach((btn, i) => {
+                btn.classList.toggle('selected', i === (m / 5));
+            });
+        }
+
+        function updateTimeDisplay() {
+            document.getElementById('pickerDisplay').textContent =
+                `${String(selectedHour).padStart(2, '0')}:${String(selectedMinute).padStart(2, '0')}`;
+        }
+
+        function closeTimePicker() {
+            document.getElementById('customTimePicker').style.display = 'none';
+            document.body.style.overflow = 'auto';
+            currentTimeInput = null;
+        }
+
+        function confirmTime() {
+            if (currentTimeInput) {
+                const timeValue = `${String(selectedHour).padStart(2, '0')}:${String(selectedMinute).padStart(2, '0')}`;
+                currentTimeInput.value = timeValue;
+
+                const match = currentTimeInput.id.match(/^(start|end)_(\d+)_/);
+                if (match) {
+                    const dayIndex = parseInt(match[2]);
+                    calculateDayHours(dayIndex);
+                    saveAllData();
+                }
+            }
+            closeTimePicker();
+        }
+
+        // Copie automatique matin → après-midi
+        function autoFillAfternoon(dayIndex, field) {
+            const morningValue = document.getElementById(`${field}_${dayIndex}_am`)?.value || '';
+            const afternoonField = document.getElementById(`${field}_${dayIndex}_pm`);
+
+            if (afternoonField && morningValue) {
+                afternoonField.value = morningValue;
+            }
+        }
+
+        function addClientEntry(dayIndex, period) {
+            const periodSection = event.target.closest('.period-section');
+            if (!periodSection) return;
+
+            // Compter le nombre de clients déjà présents dans cette période
+            const existingEntries = periodSection.querySelectorAll('.client-entry').length;
+            const clientNumber = existingEntries + 2; // +2 car le premier est déjà "Client 1" (implicite)
+
+            // Trouver où insérer (avant le bouton "Ajouter un client")
+            const addButton = event.target.closest('.add-client-line-btn');
+
+            // Créer une nouvelle entrée client
+            const newEntry = document.createElement('div');
+            newEntry.className = 'client-entry';
+
+            const entryId = Date.now(); // ID unique basé sur timestamp
+
+            newEntry.innerHTML = `
+                <div class="client-row">
+                    <input type="text" id="client_${dayIndex}_${period}_${entryId}" placeholder="Client ${clientNumber}" onchange="saveAllData();" />
+                    <button class="add-client-btn" style="background: #FD636B;" onclick="this.closest('.client-entry').remove(); saveAllData(); calculateDayHours(${dayIndex});">×</button>
+                </div>
+
+                <div class="time-inputs">
+                    <div class="time-group">
+                        <label>Début</label>
+                        <input type="text" id="start_${dayIndex}_${period}_${entryId}" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                    </div>
+                    <div class="time-group">
+                        <label>Fin</label>
+                        <input type="text" id="end_${dayIndex}_${period}_${entryId}" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                    </div>
+                </div>
+
+                <input type="text" id="desc_${dayIndex}_${period}_${entryId}" placeholder="Description" onchange="saveAllData();" />
+                <div class="lieu-wrapper"><input type="text" id="location_${dayIndex}_${period}_${entryId}" placeholder="Lieu" class="lieu-input" autocomplete="off" oninput="showLieuSuggestions(this)" onblur="hideLieuSuggestions(this)" onchange="saveAllData();" /><div class="lieu-suggestions"></div></div>
+            `;
+
+            // Insérer avant le bouton "Ajouter un client"
+            addButton.parentNode.insertBefore(newEntry, addButton);
+        }
+
+        function getWeekKey() {
+            return `week_${currentWeekStart.toISOString().split('T')[0]}`;
+        }
+
+        function formatDate(date) {
+            const d = new Date(date);
+            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}`;
+        }
+
+        function formatDateFull(date) {
+            const d = new Date(date);
+            const year = String(d.getFullYear()).slice(-2);
+            return `${String(d.getDate()).padStart(2, '0')}/${String(d.getMonth() + 1).padStart(2, '0')}/${year}`;
+        }
+
+        function changeWeek(direction) {
+            saveAllData();
+            currentWeekStart.setDate(currentWeekStart.getDate() + (direction * 7));
+            loadWeekData();
+            renderWeek();
+        }
+
+        function renderDayShortcuts() {
+            const container = document.getElementById('dayShortcuts');
+            container.innerHTML = '';
+            const today = new Date();
+            const shortLabels = ['Lu', 'Ma', 'Me', 'Je', 'Ve', 'Sa'];
+
+            for (let i = 0; i < 6; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+
+                const isToday = date.toDateString() === today.toDateString();
+
+                const btn = document.createElement('button');
+                btn.className = 'day-shortcut' + (isToday ? ' sc-today' : '');
+                btn.innerHTML = `
+                    <span class="sc-label">${shortLabels[i]}</span>
+                    <span class="sc-num">${date.getDate()}</span>
+                `;
+                btn.addEventListener('click', () => {
+                    const cards = document.querySelectorAll('.day-card');
+                    if (cards[i]) {
+                        cards[i].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    }
+                });
+                container.appendChild(btn);
+            }
+        }
+
+        function renderWeek() {
+            const container = document.getElementById('daysContainer');
+            container.innerHTML = '';
+
+            const endDate = new Date(currentWeekStart);
+            endDate.setDate(endDate.getDate() + 5); // 6 jours (sans dimanche)
+
+            document.getElementById('weekDisplay').textContent =
+                monthNames[currentWeekStart.getMonth()];
+
+            renderDayShortcuts();
+
+            // Lundi à Samedi (6 jours)
+            for (let i = 0; i < 6; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+
+                const card = document.createElement('div');
+                card.className = 'day-card';
+                card.innerHTML = `
+                    <div class="day-title">
+                        <span class="day-name">${daysOfWeek[date.getDay()]}</span>
+                        <span class="day-date">${formatDate(date)}</span>
+                    </div>
+
+                    <!-- MATIN -->
+                    <div class="period-section">
+                        <div class="period-header">Matin</div>
+
+                        <div class="client-row">
+                            <input type="text" id="client_${i}_am" placeholder="Nom du client" onchange="saveAllData(); autoFillAfternoon(${i}, 'client');" />
+                        </div>
+
+                        <div class="time-inputs">
+                            <div class="time-group">
+                                <label>Début</label>
+                                <input type="text" id="start_${i}_am" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                            </div>
+                            <div class="time-group">
+                                <label>Fin</label>
+                                <input type="text" id="end_${i}_am" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                            </div>
+                        </div>
+
+                        <input type="text" id="desc_${i}_am" placeholder="Description" onchange="saveAllData(); autoFillAfternoon(${i}, 'desc');" />
+                        <div class="lieu-wrapper"><input type="text" id="location_${i}_am" placeholder="Lieu" class="lieu-input" autocomplete="off" oninput="showLieuSuggestions(this)" onblur="hideLieuSuggestions(this)" onchange="saveAllData(); autoFillAfternoon(${i}, 'location');" /><div class="lieu-suggestions"></div></div>
+
+                        <!-- Bouton ajouter client en bas -->
+                        <button class="add-client-line-btn" onclick="addClientEntry(${i}, 'am')">
+                            <span>+</span> Ajouter un client
+                        </button>
+                    </div>
+
+                    <!-- APRÈS-MIDI -->
+                    <div class="period-section">
+                        <div class="day-header">
+                            <span class="period-header">Après-midi</span>
+                            <span class="day-date">${formatDate(date)}</span>
+                        </div>
+
+                        <div class="client-row">
+                            <input type="text" id="client_${i}_pm" placeholder="Nom du client" onchange="saveAllData();" />
+                        </div>
+
+                        <div class="time-inputs">
+                            <div class="time-group">
+                                <label>Début</label>
+                                <input type="text" id="start_${i}_pm" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                            </div>
+                            <div class="time-group">
+                                <label>Fin</label>
+                                <input type="text" id="end_${i}_pm" readonly placeholder="--:--" onclick="openCustomTimePicker(this)" />
+                            </div>
+                        </div>
+
+                        <div class="desc-row">
+                            <input type="text" id="desc_${i}_pm" placeholder="Description" onchange="saveAllData();" />
+                        </div>
+
+                        <div class="location-row"><div class="lieu-wrapper"><input type="text" id="location_${i}_pm" placeholder="Lieu" class="lieu-input" autocomplete="off" oninput="showLieuSuggestions(this)" onblur="hideLieuSuggestions(this)" onchange="saveAllData();" /><div class="lieu-suggestions"></div></div></div>
+
+                        <!-- Bouton ajouter client en bas -->
+                        <button class="add-client-line-btn" onclick="addClientEntry(${i}, 'pm')">
+                            <span>+</span> Ajouter un client
+                        </button>
+
+                        <div class="hours-display" id="hours_day_${i}">0h00</div>
+                    </div>
+
+                    <!-- VÉHICULE PERSONNEL -->
+                    <div class="expenses-section" style="border-top: none; padding-top: 0;">
+                        <div class="expenses-header">
+                            Véhicule Personnel
+                            <span class="add-expense-btn" onclick="addKm(${i})">+</span>
+                        </div>
+                        <div id="km_${i}"></div>
+                    </div>
+
+                    <!-- FRAIS -->
+                    <div class="expenses-section">
+                        <div class="expenses-header">
+                            Frais (avec quittance)
+                            <span class="add-expense-btn" onclick="addExpense(${i})">+</span>
+                        </div>
+                        <div id="expenses_${i}"></div>
+
+                        <div class="meal-checkbox">
+                            <input type="checkbox" id="meal_${i}" onchange="saveAllData(); calculateTotals();" />
+                            <label for="meal_${i}">Repas remboursé</label>
+                        </div>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            }
+
+            loadWeekData();
+            calculateTotals();
+            renderCalendar();
+        }
+
+        function calculateDayHours(dayIndex) {
+            let dayTotalMinutes = 0;
+
+            ['am', 'pm'].forEach(period => {
+                // Calculer l'entrée principale
+                const start = document.getElementById(`start_${dayIndex}_${period}`)?.value;
+                const end = document.getElementById(`end_${dayIndex}_${period}`)?.value;
+
+                if (start && end && start !== '--:--' && end !== '--:--') {
+                    const [startH, startM] = start.split(':').map(Number);
+                    const [endH, endM] = end.split(':').map(Number);
+                    let minutes = (endH * 60 + endM) - (startH * 60 + startM);
+                    if (minutes < 0) minutes += 24 * 60;
+                    dayTotalMinutes += minutes;
+                }
+
+                // Calculer les entrées supplémentaires
+                document.querySelectorAll(`[id^="start_${dayIndex}_${period}_"]`).forEach(startInput => {
+                    const id = startInput.id.replace(`start_${dayIndex}_${period}_`, '');
+                    const endInput = document.getElementById(`end_${dayIndex}_${period}_${id}`);
+
+                    if (startInput.value && endInput?.value &&
+                        startInput.value !== '--:--' && endInput.value !== '--:--') {
+                        const [startH, startM] = startInput.value.split(':').map(Number);
+                        const [endH, endM] = endInput.value.split(':').map(Number);
+                        let minutes = (endH * 60 + endM) - (startH * 60 + startM);
+                        if (minutes < 0) minutes += 24 * 60;
+                        dayTotalMinutes += minutes;
+                    }
+                });
+            });
+
+            // Afficher le total de la journée
+            const dayHours = Math.floor(dayTotalMinutes / 60);
+            const dayMins = dayTotalMinutes % 60;
+            const dayDisplay = document.getElementById(`hours_day_${dayIndex}`);
+            if (dayDisplay) {
+                dayDisplay.textContent = `${dayHours}h${String(dayMins).padStart(2, '0')}`;
+            }
+
+            calculateTotals();
+        }
+
+        function calculateTotals() {
+            let totalMinutes = 0;
+            let totalKm = 0;
+            let totalMeals = 0;
+            let totalExpenses = 0;
+
+            for (let i = 0; i < 6; i++) {
+                // Compter TOUTES les entrées time (principales + dynamiques)
+                document.querySelectorAll(`[id^="start_${i}_"]`).forEach(startInput => {
+                    const endId = startInput.id.replace('start_', 'end_');
+                    const endInput = document.getElementById(endId);
+
+                    if (startInput.value && endInput?.value) {
+                        const [startH, startM] = startInput.value.split(':').map(Number);
+                        const [endH, endM] = endInput.value.split(':').map(Number);
+                        let minutes = (endH * 60 + endM) - (startH * 60 + startM);
+                        if (minutes < 0) minutes += 24 * 60;
+                        totalMinutes += minutes;
+                    }
+                });
+
+                // Additionner les KM depuis la liste
+                const kmDiv = document.getElementById(`km_${i}`);
+                if (kmDiv) {
+                    kmDiv.querySelectorAll('input[type="number"]').forEach(input => {
+                        totalKm += parseFloat(input.value) || 0;
+                    });
+                }
+
+                if (document.getElementById(`meal_${i}`)?.checked) totalMeals++;
+
+                // Additionner les frais depuis la liste
+                const expensesDiv = document.getElementById(`expenses_${i}`);
+                if (expensesDiv) {
+                    expensesDiv.querySelectorAll('input[type="number"]').forEach(input => {
+                        totalExpenses += parseFloat(input.value) || 0;
+                    });
+                }
+            }
+
+            const hours = Math.floor(totalMinutes / 60);
+            const mins = totalMinutes % 60;
+            document.getElementById('weeklyTotal').textContent = `${hours}h${String(mins).padStart(2, '0')}`;
+            document.getElementById('weekHours').textContent = `${hours}h${String(mins).padStart(2, '0')}`;
+            document.getElementById('weekKm').textContent = Math.round(totalKm);
+            document.getElementById('weekMeals').textContent = totalMeals;
+            document.getElementById('weekExpenses').textContent = totalExpenses.toFixed(2);
+        }
+
+        let expenseCounts = [0,0,0,0,0,0];
+
+        function addExpense(dayIndex) {
+            const container = document.getElementById(`expenses_${dayIndex}`);
+            const expenseId = expenseCounts[dayIndex]++;
+
+            const expenseDiv = document.createElement('div');
+            expenseDiv.className = 'expense-item';
+            expenseDiv.innerHTML = `
+                <input type="text" id="expense_desc_${dayIndex}_${expenseId}" placeholder="Description" onchange="saveAllData();" />
+                <input type="number" id="expense_amount_${dayIndex}_${expenseId}" placeholder="0.00" step="0.05" onchange="saveAllData(); calculateTotals();" />
+                <button class="remove-expense-btn" onclick="this.parentElement.remove(); calculateTotals(); saveAllData();">×</button>
+            `;
+            container.appendChild(expenseDiv);
+        }
+
+        function addKm(dayIndex) {
+            const container = document.getElementById(`km_${dayIndex}`);
+            const kmId = expenseCounts[dayIndex]++;
+
+            const kmDiv = document.createElement('div');
+            kmDiv.className = 'expense-item';
+            kmDiv.innerHTML = `
+                <input type="text" id="km_desc_${dayIndex}_${kmId}" placeholder="Description du trajet" onchange="saveAllData();" />
+                <input type="number" id="km_amount_${dayIndex}_${kmId}" placeholder="0" step="1" onchange="saveAllData(); calculateTotals();" />
+                <button class="remove-expense-btn" onclick="this.parentElement.remove(); calculateTotals(); saveAllData();">×</button>
+            `;
+            container.appendChild(kmDiv);
+        }
+
+        function saveAllData() {
+            const data = { days: [] };
+
+            for (let i = 0; i < 6; i++) {
+                const dayData = {
+                    am: {
+                        client: document.getElementById(`client_${i}_am`)?.value || '',
+                        start: document.getElementById(`start_${i}_am`)?.value || '',
+                        end: document.getElementById(`end_${i}_am`)?.value || '',
+                        desc: document.getElementById(`desc_${i}_am`)?.value || '',
+                        location: document.getElementById(`location_${i}_am`)?.value || ''
+                    },
+                    pm: {
+                        client: document.getElementById(`client_${i}_pm`)?.value || '',
+                        start: document.getElementById(`start_${i}_pm`)?.value || '',
+                        end: document.getElementById(`end_${i}_pm`)?.value || '',
+                        desc: document.getElementById(`desc_${i}_pm`)?.value || '',
+                        location: document.getElementById(`location_${i}_pm`)?.value || ''
+                    },
+                    km: [],
+                    meal: document.getElementById(`meal_${i}`)?.checked || false,
+                    expenses: []
+                };
+
+                // Sauver les km
+                const kmDiv = document.getElementById(`km_${i}`);
+                if (kmDiv) {
+                    kmDiv.querySelectorAll('.expense-item').forEach(item => {
+                        const desc = item.querySelector('input[type="text"]')?.value;
+                        const amount = item.querySelector('input[type="number"]')?.value;
+                        if (desc || amount) {
+                            dayData.km.push({ desc, amount });
+                        }
+                    });
+                }
+
+                // Sauver les frais
+                const expensesDiv = document.getElementById(`expenses_${i}`);
+                if (expensesDiv) {
+                    expensesDiv.querySelectorAll('.expense-item').forEach(item => {
+                        const desc = item.querySelector('input[type="text"]')?.value;
+                        const amount = item.querySelector('input[type="number"]')?.value;
+                        if (desc || amount) {
+                            dayData.expenses.push({ desc, amount });
+                        }
+                    });
+                }
+
+                data.days.push(dayData);
+            }
+
+            localStorage.setItem(getWeekKey(), JSON.stringify(data));
+            localStorage.setItem('employeeName', document.getElementById('employeeName').value);
+
+            // Sauver les informations supplémentaires
+            localStorage.setItem('notes', document.getElementById('notes')?.value || '');
+            localStorage.setItem('firstName', document.getElementById('firstName')?.value || '');
+            localStorage.setItem('lastName', document.getElementById('lastName')?.value || '');
+            localStorage.setItem('address', document.getElementById('address')?.value || '');
+            localStorage.setItem('city', document.getElementById('city')?.value || '');
+            localStorage.setItem('postalCode', document.getElementById('postalCode')?.value || '');
+            localStorage.setItem('country', document.getElementById('country')?.value || '');
+            localStorage.setItem('phone', document.getElementById('phone')?.value || '');
+            localStorage.setItem('personalEmail', document.getElementById('personalEmail')?.value || '');
+        }
+
+        function loadWeekData() {
+            const saved = localStorage.getItem(getWeekKey());
+            if (saved) {
+                const data = JSON.parse(saved);
+
+                for (let i = 0; i < 6; i++) {
+                    const day = data.days[i] || {};
+
+                    ['am', 'pm'].forEach(period => {
+                        const p = day[period] || {};
+                        if (document.getElementById(`client_${i}_${period}`)) document.getElementById(`client_${i}_${period}`).value = p.client || '';
+                        if (document.getElementById(`start_${i}_${period}`)) document.getElementById(`start_${i}_${period}`).value = p.start || '';
+                        if (document.getElementById(`end_${i}_${period}`)) document.getElementById(`end_${i}_${period}`).value = p.end || '';
+                        if (document.getElementById(`desc_${i}_${period}`)) document.getElementById(`desc_${i}_${period}`).value = p.desc || '';
+                        if (document.getElementById(`location_${i}_${period}`)) document.getElementById(`location_${i}_${period}`).value = p.location || '';
+                    });
+
+                    if (document.getElementById(`meal_${i}`)) document.getElementById(`meal_${i}`).checked = day.meal || false;
+
+                    // Charger les KM
+                    if (day.km && day.km.length > 0) {
+                        const kmContainer = document.getElementById(`km_${i}`);
+                        if (kmContainer) {
+                            kmContainer.innerHTML = '';
+                            day.km.forEach((km, idx) => {
+                                const kmDiv = document.createElement('div');
+                                kmDiv.className = 'expense-item';
+                                kmDiv.innerHTML = `
+                                    <input type="text" value="${km.desc || ''}" placeholder="Description du trajet" onchange="saveAllData();" />
+                                    <input type="number" value="${km.amount || ''}" placeholder="0" step="1" onchange="saveAllData(); calculateTotals();" />
+                                    <button class="remove-expense-btn" onclick="this.parentElement.remove(); calculateTotals(); saveAllData();">×</button>
+                                `;
+                                kmContainer.appendChild(kmDiv);
+                                expenseCounts[i]++;
+                            });
+                        }
+                    }
+                    if (day.expenses && day.expenses.length > 0) {
+                        const container = document.getElementById(`expenses_${i}`);
+                        container.innerHTML = '';
+                        day.expenses.forEach((expense, idx) => {
+                            const expenseDiv = document.createElement('div');
+                            expenseDiv.className = 'expense-item';
+                            expenseDiv.innerHTML = `
+                                <input type="text" value="${expense.desc || ''}" placeholder="Description" onchange="saveAllData();" />
+                                <input type="number" value="${expense.amount || ''}" placeholder="0.00" step="0.05" onchange="saveAllData(); calculateTotals();" />
+                                <button class="remove-expense-btn" onclick="this.parentElement.remove(); calculateTotals(); saveAllData();">×</button>
+                            `;
+                            container.appendChild(expenseDiv);
+                            expenseCounts[i]++;
+                        });
+                    }
+
+                    calculateDayHours(i);
+                }
+            }
+
+            const savedName = localStorage.getItem('employeeName');
+            if (savedName) document.getElementById('employeeName').value = savedName;
+
+            // Charger les informations supplémentaires
+            const notes = localStorage.getItem('notes');
+            if (notes) document.getElementById('notes').value = notes;
+
+            const firstName = localStorage.getItem('firstName');
+            if (firstName) document.getElementById('firstName').value = firstName;
+
+            const lastName = localStorage.getItem('lastName');
+            if (lastName) document.getElementById('lastName').value = lastName;
+
+            const address = localStorage.getItem('address');
+            if (address) document.getElementById('address').value = address;
+
+            const city = localStorage.getItem('city');
+            if (city) document.getElementById('city').value = city;
+
+            const postalCode = localStorage.getItem('postalCode');
+            if (postalCode) document.getElementById('postalCode').value = postalCode;
+
+            const country = localStorage.getItem('country');
+            if (country) document.getElementById('country').value = country;
+
+            const phone = localStorage.getItem('phone');
+            if (phone) document.getElementById('phone').value = phone;
+
+            const personalEmail = localStorage.getItem('personalEmail');
+            if (personalEmail) document.getElementById('personalEmail').value = personalEmail;
+        }
+
+        function saveData() {
+            saveAllData();
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = originalText; }, 1500);
+        }
+
+        function clearWeek() {
+            if (confirm('Effacer toutes les données de cette semaine ?')) {
+                localStorage.removeItem(getWeekKey());
+                renderWeek();
+            }
+        }
+
+
+        function renderCalendar() {
+            const today = new Date();
+            const currentMonth = currentWeekStart.getMonth();
+            const currentYear = currentWeekStart.getFullYear();
+
+            document.getElementById('calendarHeader').textContent = `${monthNames[currentMonth]} ${currentYear}`;
+
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const startDay = firstDay.getDay();
+
+            // Collecter les jours avec heures
+            const daysWithHours = new Set();
+            Object.keys(localStorage).forEach(key => {
+                if (key.startsWith('week_')) {
+                    const weekData = JSON.parse(localStorage.getItem(key));
+                    if (weekData && weekData.days) {
+                        const weekDate = new Date(key.replace('week_', ''));
+                        weekData.days.forEach((day, i) => {
+                            const dayDate = new Date(weekDate);
+                            dayDate.setDate(dayDate.getDate() + i);
+
+                            if (dayDate.getMonth() === currentMonth && dayDate.getFullYear() === currentYear) {
+                                let hasHours = false;
+                                ['am', 'pm'].forEach(period => {
+                                    if (day[period] && (day[period].start || day[period].end)) {
+                                        hasHours = true;
+                                    }
+                                });
+                                if (hasHours) {
+                                    daysWithHours.add(dayDate.getDate());
+                                }
+                            }
+                        });
+                    }
+                }
+            });
+
+            const grid = document.getElementById('calendarGrid');
+            grid.innerHTML = '';
+
+            // Labels des jours
+            dayLabels.forEach(label => {
+                const dayLabel = document.createElement('div');
+                dayLabel.className = 'calendar-day-label';
+                dayLabel.textContent = label;
+                grid.appendChild(dayLabel);
+            });
+
+            // Jours du mois précédent
+            const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+            for (let i = startDay - 1; i >= 0; i--) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day other-month';
+                day.textContent = prevMonthLastDay - i;
+                grid.appendChild(day);
+            }
+
+            // Jours du mois actuel
+            for (let i = 1; i <= lastDay.getDate(); i++) {
+                const day = document.createElement('div');
+                day.className = 'calendar-day';
+                day.textContent = i;
+
+                const dayDate = new Date(currentYear, currentMonth, i);
+                if (dayDate.toDateString() === today.toDateString()) {
+                    day.classList.add('today');
+                }
+                if (daysWithHours.has(i)) {
+                    day.classList.add('has-hours');
+                }
+
+                // Navigation au clic
+                day.onclick = () => {
+                    const clickedDate = new Date(currentYear, currentMonth, i);
+                    // Trouver le lundi de cette semaine
+                    const dayOfWeek = clickedDate.getDay();
+                    const mondayOffset = dayOfWeek === 0 ? -6 : 1 - dayOfWeek;
+                    currentWeekStart = new Date(clickedDate);
+                    currentWeekStart.setDate(clickedDate.getDate() + mondayOffset);
+
+                    loadWeekData();
+                    renderWeek();
+
+                    // Scroller vers le jour cliqué
+                    setTimeout(() => {
+                        const dayCards = document.querySelectorAll('.day-card');
+                        const targetDayIndex = dayOfWeek === 0 ? 6 : dayOfWeek - 1;
+                        if (dayCards[targetDayIndex]) {
+                            dayCards[targetDayIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+                        }
+                    }, 100);
+                };
+
+                grid.appendChild(day);
+            }
+
+            // Jours du mois suivant
+            const remainingDays = 7 - (grid.children.length - 7) % 7;
+            if (remainingDays < 7) {
+                for (let i = 1; i <= remainingDays; i++) {
+                    const day = document.createElement('div');
+                    day.className = 'calendar-day other-month';
+                    day.textContent = i;
+                    grid.appendChild(day);
+                }
+            }
+        }
+
+        function exportToExcel() {
+            const name = document.getElementById('employeeName').value || 'Employé';
+
+            const wb = XLSX.utils.book_new();
+            const data = [];
+
+            // EN-TÊTE
+            data.push(['FEUILLE HEBDOMADAIRE - ' + (document.getElementById('companyName').value || 'ENTREPRISE').toUpperCase()]);
+            data.push([]);
+            data.push(['Employé', name]);
+            const endDateExport = new Date(currentWeekStart);
+            endDateExport.setDate(endDateExport.getDate() + 5);
+            data.push(['Semaine', `${formatDateFull(currentWeekStart)} - ${formatDateFull(endDateExport)}`]);
+            data.push(['Date export', new Date().toLocaleDateString('fr-CH')]);
+            data.push([]);
+
+            // COLONNES
+            data.push(['DATE', 'JOUR', 'PÉRIODE', 'CLIENT', 'DÉBUT', 'FIN', 'HEURES', 'DESCRIPTION', 'LIEU', 'KM', 'REPAS']);
+
+            // DONNÉES PAR JOUR
+            for (let i = 0; i < 6; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+                const kmDiv = document.getElementById(`km_${i}`);
+                const kmTotal = kmDiv ? Array.from(kmDiv.querySelectorAll('input[type="number"]')).reduce((sum, inp) => sum + (parseFloat(inp.value) || 0), 0) : 0;
+                const km = kmTotal > 0 ? String(kmTotal) : '';
+                const meal = document.getElementById(`meal_${i}`)?.checked;
+
+                let dayHasData = false;
+
+                ['am', 'pm'].forEach(period => {
+                    const start = document.getElementById(`start_${i}_${period}`)?.value;
+                    const end = document.getElementById(`end_${i}_${period}`)?.value;
+                    const client = document.getElementById(`client_${i}_${period}`)?.value;
+
+                    if ((start && start !== '--:--') || (end && end !== '--:--') || client) {
+                        let minutes = 0;
+                        if (start && start !== '--:--' && end && end !== '--:--') {
+                            const [startH, startM] = start.split(':').map(Number);
+                            const [endH, endM] = end.split(':').map(Number);
+                            minutes = (endH * 60 + endM) - (startH * 60 + startM);
+                            if (minutes < 0) minutes += 24 * 60;
+                        }
+                        const hours = Math.floor(minutes / 60);
+                        const mins = minutes % 60;
+
+                        data.push([
+                            formatDateFull(date),
+                            daysOfWeek[date.getDay()],
+                            period === 'am' ? 'MATIN' : 'APRÈS-MIDI',
+                            client || '',
+                            start === '--:--' ? '' : start,
+                            end === '--:--' ? '' : end,
+                            minutes > 0 ? `${hours}h${String(mins).padStart(2, '0')}` : '',
+                            document.getElementById(`desc_${i}_${period}`)?.value || '',
+                            document.getElementById(`location_${i}_${period}`)?.value || '',
+                            !dayHasData ? km : '',
+                            !dayHasData && period === 'pm' && meal ? 'Oui' : ''
+                        ]);
+                        dayHasData = true;
+                    }
+                });
+
+                // Ajouter les frais du jour
+                const expensesDiv = document.getElementById(`expenses_${i}`);
+                if (expensesDiv) {
+                    expensesDiv.querySelectorAll('.expense-item').forEach(item => {
+                        const desc = item.querySelector('input[type="text"]')?.value;
+                        const amount = item.querySelector('input[type="number"]')?.value;
+                        if (desc || amount) {
+                            data.push([
+                                formatDateFull(date),
+                                daysOfWeek[date.getDay()],
+                                'FRAIS',
+                                desc || '',
+                                '',
+                                '',
+                                '',
+                                '',
+                                '',
+                                '',
+                                amount ? `${amount} CHF` : ''
+                            ]);
+                        }
+                    });
+                }
+            }
+
+            data.push([]);
+            data.push(['TOTAUX SEMAINE']);
+            data.push(['Total heures', document.getElementById('weekHours').textContent]);
+            data.push(['Total kilomètres', document.getElementById('weekKm').textContent + ' km']);
+            data.push(['Total repas', document.getElementById('weekMeals').textContent]);
+            data.push(['Total frais', document.getElementById('weekExpenses').textContent + ' CHF']);
+
+            const ws = XLSX.utils.aoa_to_sheet(data);
+
+            // Largeurs de colonnes optimisées
+            ws['!cols'] = [
+                {wch: 12},  // Date
+                {wch: 10},  // Jour
+                {wch: 12},  // Période
+                {wch: 20},  // Client
+                {wch: 8},   // Début
+                {wch: 8},   // Fin
+                {wch: 8},   // Heures
+                {wch: 30},  // Description
+                {wch: 20},  // Lieu
+                {wch: 6},   // KM
+                {wch: 8}    // Repas
+            ];
+
+            XLSX.utils.book_append_sheet(wb, ws, 'Feuille Heures');
+            XLSX.writeFile(wb, `${(document.getElementById('companyName').value || 'Entreprise').replace(/\s/g, '_')}_${name.replace(/\s/g, '_')}_${formatDateFull(currentWeekStart).replace(/\//g, '-')}.xlsx`);
+
+            const btn = event.target;
+            const originalText = btn.textContent;
+            btn.textContent = '✓';
+            setTimeout(() => { btn.textContent = originalText; }, 1500);
+        }
+
+        function exportToPDF() {
+            const name = document.getElementById('employeeName').value || 'Employé';
+            const company = document.getElementById('companyName').value || 'Entreprise';
+            const endDate = new Date(currentWeekStart);
+            endDate.setDate(endDate.getDate() + 5);
+            const weekDisplay = `${formatDateFull(currentWeekStart)} — ${formatDateFull(endDate)}`;
+
+            // Infos personnelles
+            const firstName = document.getElementById('firstName')?.value || '';
+            const lastName  = document.getElementById('lastName')?.value  || '';
+            const address   = document.getElementById('address')?.value   || '';
+            const city      = document.getElementById('city')?.value      || '';
+            const postal    = document.getElementById('postalCode')?.value|| '';
+            const country   = document.getElementById('country')?.value   || '';
+            const phone     = document.getElementById('phone')?.value     || '';
+            const email     = document.getElementById('personalEmail')?.value || '';
+            const notes     = document.getElementById('notes')?.value     || '';
+
+            const hasPersonal = firstName || lastName || address || city || phone || email;
+
+            // ── CALCUL HAUTEUR DYNAMIQUE ──
+            const scale = 2;
+            const W = 595;
+            const L = 40, R = W - 40;
+            const rowH = 18;
+
+            // Compter les lignes de données pour estimer la hauteur
+            let estimatedRows = 0;
+            for (let i = 0; i < 6; i++) {
+                ['am','pm'].forEach(p => {
+                    const c = document.getElementById(`client_${i}_${p}`)?.value || '';
+                    const s = document.getElementById(`start_${i}_${p}`)?.value || '';
+                    if (c || (s && s !== '--:--')) estimatedRows++;
+                });
+                if (document.getElementById(`meal_${i}`)?.checked) estimatedRows += 0.8;
+                const expDiv = document.getElementById(`expenses_${i}`);
+                if (expDiv) estimatedRows += expDiv.querySelectorAll('.expense-item').length * 0.8;
+                estimatedRows += 0.3; // espace entre jours
+            }
+
+            const noteLines = notes ? Math.ceil(notes.length / 70) + 1 : 0;
+            const personalH = hasPersonal ? 120 : 0;
+            const notesH    = notes ? 30 + noteLines * 14 : 0;
+
+            const baseH = 90 + 50 + rowH + (estimatedRows * rowH) + 20 + 20 + (4 * 18) + personalH + notesH + 50;
+            const H = Math.max(842, Math.ceil(baseH / 10) * 10 + 10);
+
+            const canvas = document.createElement('canvas');
+            canvas.width  = W * scale;
+            canvas.height = H * scale;
+            const ctx = canvas.getContext('2d');
+            ctx.scale(scale, scale);
+
+            // Fond blanc
+            ctx.fillStyle = '#FFFFFF';
+            ctx.fillRect(0, 0, W, H);
+
+            // ── BANDE EN-TÊTE ──
+            ctx.fillStyle = '#FD636B';
+            ctx.fillRect(0, 0, W, 70);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 22px Arial';
+            ctx.fillText(company.toUpperCase(), L, 30);
+            ctx.font = '11px Arial';
+            ctx.fillStyle = 'rgba(255,255,255,0.85)';
+            ctx.fillText('FEUILLE D\'HEURES HEBDOMADAIRE', L, 48);
+            ctx.font = '10px Arial';
+            ctx.textAlign = 'right';
+            ctx.fillText(new Date().toLocaleDateString('fr-CH'), R, 48);
+            ctx.textAlign = 'left';
+
+            let y = 90;
+
+            // ── BLOC INFO EMPLOYÉ ──
+            ctx.fillStyle = '#F8F8F8';
+            ctx.fillRect(L, y, R - L, 36);
+            ctx.strokeStyle = '#E5E5E5';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(L, y, R - L, 36);
+            ctx.fillStyle = '#000000';
+            ctx.font = 'bold 11px Arial';
+            ctx.fillText('Employé :', L + 10, y + 14);
+            ctx.font = '11px Arial';
+            ctx.fillText(name, L + 72, y + 14);
+            ctx.font = 'bold 11px Arial';
+            ctx.fillText('Semaine :', L + 10, y + 28);
+            ctx.font = '11px Arial';
+            ctx.fillText(weekDisplay, L + 72, y + 28);
+            y += 50;
+
+            // ── EN-TÊTE TABLEAU ──
+            const cols = { jour: L, periode: L + 90, client: L + 160, horaire: L + 310, heures: L + 420, km: L + 480 };
+
+            ctx.fillStyle = '#222222';
+            ctx.fillRect(L, y, R - L, rowH);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 9px Arial';
+            ctx.fillText('JOUR',    cols.jour    + 4, y + 12);
+            ctx.fillText('PÉRIODE', cols.periode + 4, y + 12);
+            ctx.fillText('CLIENT',  cols.client  + 4, y + 12);
+            ctx.fillText('HORAIRE', cols.horaire + 4, y + 12);
+            ctx.fillText('HEURES',  cols.heures  + 4, y + 12);
+            ctx.fillText('KM',      cols.km      + 4, y + 12);
+            y += rowH;
+
+            // ── LIGNES DONNÉES ──
+            let zebra = false;
+            for (let i = 0; i < 6; i++) {
+                const date = new Date(currentWeekStart);
+                date.setDate(date.getDate() + i);
+                const dateStr = formatDate(date);
+                const dayStr  = daysOfWeek[date.getDay()];
+
+                const kmDiv   = document.getElementById(`km_${i}`);
+                const kmTotal = kmDiv ? Array.from(kmDiv.querySelectorAll('input[type="number"]'))
+                    .reduce((s, inp) => s + (parseFloat(inp.value) || 0), 0) : 0;
+                const meal    = document.getElementById(`meal_${i}`)?.checked;
+
+                let dayPrinted  = false;
+                let kmPrinted   = false;
+
+                ['am', 'pm'].forEach(period => {
+                    const client = document.getElementById(`client_${i}_${period}`)?.value || '';
+                    const start  = document.getElementById(`start_${i}_${period}`)?.value  || '';
+                    const end    = document.getElementById(`end_${i}_${period}`)?.value    || '';
+
+                    if (!client && (!start || start === '--:--')) return;
+
+                    let minutes = 0;
+                    if (start && start !== '--:--' && end && end !== '--:--') {
+                        const [sh, sm] = start.split(':').map(Number);
+                        const [eh, em] = end.split(':').map(Number);
+                        minutes = (eh * 60 + em) - (sh * 60 + sm);
+                        if (minutes < 0) minutes += 1440;
+                    }
+                    const hStr       = minutes > 0 ? `${Math.floor(minutes/60)}h${String(minutes%60).padStart(2,'0')}` : '';
+                    const horaireStr = (start && start !== '--:--') ? `${start} — ${end}` : '';
+
+                    ctx.fillStyle = zebra ? '#F9F9F9' : '#FFFFFF';
+                    ctx.fillRect(L, y, R - L, rowH);
+
+                    if (!dayPrinted) {
+                        ctx.fillStyle = '#FD636B';
+                        ctx.fillRect(L, y, 3, rowH);
+                    }
+
+                    ctx.fillStyle = '#000000';
+                    if (!dayPrinted) {
+                        ctx.font = 'bold 9px Arial';
+                        ctx.fillText(`${dateStr} ${dayStr}`, cols.jour + 6, y + 12);
+                        dayPrinted = true;
+                    }
+
+                    ctx.font = '9px Arial';
+                    ctx.fillText(period === 'am' ? 'Matin' : 'Après-midi', cols.periode + 4, y + 12);
+
+                    const clientTrunc = client.length > 18 ? client.substring(0, 17) + '…' : client;
+                    ctx.fillText(clientTrunc, cols.client + 4, y + 12);
+                    ctx.fillText(horaireStr, cols.horaire + 4, y + 12);
+
+                    ctx.font = 'bold 9px Arial';
+                    ctx.fillText(hStr, cols.heures + 4, y + 12);
+                    ctx.font = '9px Arial';
+
+                    if (!kmPrinted && kmTotal > 0) {
+                        ctx.fillText(kmTotal + ' km', cols.km + 4, y + 12);
+                        kmPrinted = true;
+                    }
+
+                    ctx.strokeStyle = '#EEEEEE';
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath();
+                    ctx.moveTo(L, y + rowH);
+                    ctx.lineTo(R, y + rowH);
+                    ctx.stroke();
+
+                    zebra = !zebra;
+                    y += rowH;
+                });
+
+                // Frais — sobre, même style que les lignes
+                const expDiv = document.getElementById(`expenses_${i}`);
+                if (expDiv) {
+                    expDiv.querySelectorAll('.expense-item').forEach(item => {
+                        const desc   = item.querySelector('input[type="text"]')?.value   || '';
+                        const amount = item.querySelector('input[type="number"]')?.value || '';
+                        if (!desc && !amount) return;
+
+                        ctx.fillStyle = zebra ? '#F9F9F9' : '#FFFFFF';
+                        ctx.fillRect(L, y, R - L, rowH);
+                        ctx.fillStyle = '#000000';
+                        ctx.font = '9px Arial';
+                        ctx.fillText('Frais', cols.periode + 4, y + 12);
+                        const descTrunc = desc.length > 18 ? desc.substring(0, 17) + '…' : desc;
+                        ctx.fillText(descTrunc, cols.client + 4, y + 12);
+                        ctx.font = 'bold 9px Arial';
+                        ctx.textAlign = 'right';
+                        ctx.fillText(amount ? amount + ' CHF' : '', R - 4, y + 12);
+                        ctx.textAlign = 'left';
+                        ctx.font = '9px Arial';
+
+                        ctx.strokeStyle = '#EEEEEE';
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath(); ctx.moveTo(L, y + rowH); ctx.lineTo(R, y + rowH); ctx.stroke();
+
+                        zebra = !zebra;
+                        y += rowH;
+                    });
+                }
+
+                // Repas — ligne sobre
+                if (meal) {
+                    ctx.fillStyle = zebra ? '#F9F9F9' : '#FFFFFF';
+                    ctx.fillRect(L, y, R - L, rowH);
+                    ctx.fillStyle = '#000000';
+                    ctx.font = '9px Arial';
+                    ctx.fillText('Repas', cols.periode + 4, y + 12);
+                    ctx.font = 'bold 9px Arial';
+                    ctx.textAlign = 'right';
+                    ctx.fillText('✓', R - 4, y + 12);
+                    ctx.textAlign = 'left';
+                    ctx.font = '9px Arial';
+                    ctx.strokeStyle = '#EEEEEE';
+                    ctx.lineWidth = 0.5;
+                    ctx.beginPath(); ctx.moveTo(L, y + rowH); ctx.lineTo(R, y + rowH); ctx.stroke();
+                    zebra = !zebra;
+                    y += rowH;
+                }
+
+                y += 4;
+            }
+
+            // ── RÉCAPITULATIF ──
+            y += 10;
+            ctx.fillStyle = '#222222';
+            ctx.fillRect(L, y, R - L, 20);
+            ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 10px Arial';
+            ctx.fillText('RÉCAPITULATIF DE LA SEMAINE', L + 10, y + 14);
+            y += 20;
+
+            [
+                ['Total heures', document.getElementById('weekHours').textContent],
+                ['Kilomètres',   document.getElementById('weekKm').textContent + ' km'],
+                ['Repas',        document.getElementById('weekMeals').textContent],
+                ['Frais',        document.getElementById('weekExpenses').textContent + ' CHF'],
+            ].forEach(([label, val], idx) => {
+                ctx.fillStyle = idx % 2 === 0 ? '#F8F8F8' : '#FFFFFF';
+                ctx.fillRect(L, y, R - L, 18);
+                ctx.strokeStyle = '#E5E5E5'; ctx.lineWidth = 0.5;
+                ctx.strokeRect(L, y, R - L, 18);
+                ctx.fillStyle = '#000000';
+                ctx.font = '10px Arial';
+                ctx.fillText(label, L + 10, y + 13);
+                ctx.font = 'bold 10px Arial';
+                ctx.textAlign = 'right';
+                ctx.fillText(val, R - 10, y + 13);
+                ctx.textAlign = 'left';
+                y += 18;
+            });
+
+            // ── INFORMATIONS PERSONNELLES ──
+            if (hasPersonal) {
+                y += 16;
+                ctx.fillStyle = '#222222';
+                ctx.fillRect(L, y, R - L, 20);
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 10px Arial';
+                ctx.fillText('INFORMATIONS PERSONNELLES', L + 10, y + 14);
+                y += 20;
+
+                const personalFields = [
+                    ['Prénom', firstName],
+                    ['Nom', lastName],
+                    ['Adresse', address],
+                    ['Ville', city + (postal ? '  ' + postal : '')],
+                    ['Pays', country],
+                    ['Téléphone', phone],
+                    ['Email', email],
+                ].filter(([, val]) => val.trim());
+
+                personalFields.forEach(([label, val], idx) => {
+                    ctx.fillStyle = idx % 2 === 0 ? '#F8F8F8' : '#FFFFFF';
+                    ctx.fillRect(L, y, R - L, 18);
+                    ctx.strokeStyle = '#E5E5E5'; ctx.lineWidth = 0.5;
+                    ctx.strokeRect(L, y, R - L, 18);
+                    ctx.fillStyle = '#000000';
+                    ctx.font = 'bold 10px Arial';
+                    ctx.fillText(label, L + 10, y + 13);
+                    ctx.font = '10px Arial';
+                    ctx.fillText(val, L + 100, y + 13);
+                    y += 18;
+                });
+            }
+
+            // ── INFORMATIONS COMPLÉMENTAIRES ──
+            if (notes) {
+                y += 16;
+                ctx.fillStyle = '#222222';
+                ctx.fillRect(L, y, R - L, 20);
+                ctx.fillStyle = '#FFFFFF';
+                ctx.font = 'bold 10px Arial';
+                ctx.fillText('INFORMATIONS COMPLÉMENTAIRES', L + 10, y + 14);
+                y += 20;
+
+                ctx.fillStyle = '#F8F8F8';
+                // Découper le texte en lignes de ~70 caractères
+                const words = notes.split(' ');
+                let line = '';
+                const lineH = 14;
+                const maxW = R - L - 20;
+                const noteLines = [];
+                ctx.font = '10px Arial';
+                words.forEach(word => {
+                    const test = line ? line + ' ' + word : word;
+                    if (ctx.measureText(test).width > maxW && line) {
+                        noteLines.push(line);
+                        line = word;
+                    } else {
+                        line = test;
+                    }
+                });
+                if (line) noteLines.push(line);
+
+                const notesBlockH = noteLines.length * lineH + 16;
+                ctx.fillStyle = '#F8F8F8';
+                ctx.fillRect(L, y, R - L, notesBlockH);
+                ctx.strokeStyle = '#E5E5E5'; ctx.lineWidth = 0.5;
+                ctx.strokeRect(L, y, R - L, notesBlockH);
+                ctx.fillStyle = '#000000';
+                ctx.font = '10px Arial';
+                y += 12;
+                noteLines.forEach(l => {
+                    ctx.fillText(l, L + 10, y);
+                    y += lineH;
+                });
+                y += 4;
+            }
+
+            // ── PIED DE PAGE ──
+            const footerY = Math.max(y + 20, H - 24);
+            ctx.fillStyle = '#F0F0F0';
+            ctx.fillRect(0, footerY, W, 24);
+            ctx.fillStyle = '#888888';
+            ctx.font = '8px Arial';
+            ctx.fillText('MesHeures — smims909', L, footerY + 15);
+            ctx.textAlign = 'right';
+            ctx.fillText('Document généré le ' + new Date().toLocaleDateString('fr-CH'), R, footerY + 15);
+            ctx.textAlign = 'left';
+
+            // ── TÉLÉCHARGEMENT ──
+            canvas.toBlob(blob => {
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${company.replace(/\s/g, '_')}_${name.replace(/\s/g, '_')}_${formatDateFull(currentWeekStart).replace(/\//g, '-')}.png`;
+                a.click();
+                URL.revokeObjectURL(url);
+                const btn = event.target;
+                const orig = btn.textContent;
+                btn.textContent = '✓';
+                setTimeout(() => { btn.textContent = orig; }, 1500);
+            });
+        }
+
+        // Nom entreprise
+        function saveCompanyName() {
+            const name = document.getElementById('companyName').value;
+            localStorage.setItem('companyName', name);
+        }
+
+        function loadCompanyName() {
+            const saved = localStorage.getItem('companyName');
+            if (saved) {
+                document.getElementById('companyName').value = saved;
+            }
+        }
+
+        // Init
+        loadCompanyName();
+        renderWeek();
+
+        // Scroll pour cacher/afficher le footer
+        let lastScrollTop = 0;
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const footer = document.querySelector('.summary-footer');
+
+            if (scrollTop > lastScrollTop && scrollTop > 60) {
+                footer.classList.add('hidden');
+            } else {
+                footer.classList.remove('hidden');
+            }
+
+            lastScrollTop = scrollTop <= 0 ? 0 : scrollTop;
+        }, { passive: true });
+
+
+        // ============================================================
+        // AUTOCOMPLETE LIEU — custom, minimaliste
+        // ============================================================
+        const COMMUNES = [
+            'Porrentruy','Alle','Boncourt','Bressaucourt','Buix','Bure',
+            'Chevenez','Coeuve','Cornol','Courgenay','Courtemautruy','Courchavon',
+            'Damphreux','Damvant','Fahy','Fontenais','Grandfontaine','Lugnez',
+            'Montignez','Mormont','Movelier','Ocourt','Pleigne','Réclère',
+            'Rocourt','Saint-Ursanne','Seleute','Vendlincourt',
+            'Delémont','Bassecourt','Boécourt','Bourrignon','Châtillon',
+            'Courfaivre','Courtételle','Develier','Ederswiler','Glovelier',
+            'Haute-Sorne','La Baroche','Les Genevez','Lajoux','Mettembert',
+            'Mervelier','Miécourt','Rossemaison','Soyhières','Val Terbi','Vicques',
+            'Saignelégier','Les Bois','Les Breuleux','Le Bémont','Le Noirmont',
+            'Muriaux','La Chaux-des-Breuleux','Saint-Brais','Goumois',
+            'Montfaucon','Les Enfers',
+            'Moutier','Belprahon','Champoz','Corcelles','Court','Crémines',
+            'Eschert','Grandval','Loveresse','Perrefitte','Pontenet',
+            'Reconvilier','Roches','Saicourt','Sorvilier','Tavannes',
+            'Bévilard','Malleray','Tramelan','Péry-La Heutte',
+            'La Neuveville','Diesse','Lamboing','Prêles',
+            'Saint-Imier','Courtelary','Cormoret','Cortébert','Corgémont',
+            'Sonceboz-Sombeval','Villeret','Orvin','Péry','Plagne','Renan','Sonvilier',
+            'Bienne','La Chaux-de-Fonds','Neuchâtel','Bâle','Berne','Soleure','Olten'
+        ];
+
+        function showLieuSuggestions(input) {
+            const wrapper = input.closest('.lieu-wrapper');
+            const dropdown = wrapper.querySelector('.lieu-suggestions');
+            const val = input.value.trim().toLowerCase();
+
+            dropdown.innerHTML = '';
+            if (val.length < 1) {
+                dropdown.classList.remove('visible');
+                return;
+            }
+
+            const matches = COMMUNES
+                .filter(c => c.toLowerCase().startsWith(val))
+                .slice(0, 5);
+
+            if (matches.length === 0) {
+                dropdown.classList.remove('visible');
+                return;
+            }
+
+            matches.forEach(commune => {
+                const item = document.createElement('div');
+                item.className = 'lieu-suggestion-item';
+                item.textContent = commune;
+                item.addEventListener('mousedown', (e) => {
+                    e.preventDefault(); // empêche le blur avant le click
+                    input.value = commune;
+                    dropdown.classList.remove('visible');
+                    input.dispatchEvent(new Event('change'));
+                });
+                item.addEventListener('touchstart', (e) => {
+                    e.preventDefault();
+                    input.value = commune;
+                    dropdown.classList.remove('visible');
+                    input.dispatchEvent(new Event('change'));
+                }, { passive: false });
+                dropdown.appendChild(item);
+            });
+
+            dropdown.classList.add('visible');
+        }
+
+        function hideLieuSuggestions(input) {
+            setTimeout(() => {
+                const wrapper = input.closest('.lieu-wrapper');
+                if (wrapper) {
+                    wrapper.querySelector('.lieu-suggestions').classList.remove('visible');
+                }
+            }, 150);
+        }
+        setInterval(saveAllData, 30000);
+        window.addEventListener('beforeunload', saveAllData);
+    </script>
+
+    <div style="position:fixed;bottom:6px;right:10px;font-size:9px;color:#C7C7CC;font-family:'Nunito',sans-serif;pointer-events:none;z-index:50;">smims909</div>
+
+</body>
+</html>
