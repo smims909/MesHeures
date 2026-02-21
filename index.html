@@ -16,13 +16,13 @@
     <title>MesHeures</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&family=Inter:wght@700;800;900&family=Questrial&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
         /* Anti-FOUC : masque le body jusqu'au chargement complet */
         body {
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Nunito', sans-serif;
             background: #E8E8ED;
             padding-bottom: 200px;
             font-size: 16px;
@@ -47,7 +47,6 @@
         /* ── Placeholder "Entreprise" + curseur rouge clignotant ── */
         #companyName::placeholder {
             color: #C8C8CC;
-            font-family: 'Questrial', sans-serif;
         }
 
         /* Wrapper pour le curseur superposé */
@@ -711,7 +710,7 @@
             border: 1px solid #E5E5E5;
             border-radius: 10px;
             font-size: 15px;
-            font-family: 'Nunito', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Nunito', sans-serif;
             background: #F8F8F8;
             resize: vertical;
         }
@@ -1228,7 +1227,7 @@
     </script>
     <div class="header">
         <div class="logo-container">
-            <input type="text" id="companyName" placeholder="Entreprise" style="font-family:'Questrial',sans-serif;font-size:36px;font-weight:700;color:#000000;letter-spacing:1px;text-align:center;background:transparent;border:none;padding:4px 0;margin-bottom:0;width:100%;outline:none;" oninput="saveCompanyName()" />
+            <input type="text" id="companyName" placeholder="Entreprise" style="font-family:inherit;font-size:36px;font-weight:800;color:#000000;letter-spacing:1px;text-align:center;background:transparent;border:none;padding:4px 0;margin-bottom:0;width:100%;outline:none;" oninput="saveCompanyName()" />
             <span class="company-cursor" id="companyCursor" aria-hidden="true"></span>
         </div>
         <input type="text" id="employeeName" placeholder="Nom complet" />
@@ -3737,7 +3736,7 @@
 
     </script>
 
-    <div style="position:fixed;bottom:6px;right:10px;font-size:9px;color:#C7C7CC;font-family:'Nunito',sans-serif;pointer-events:none;z-index:50;">smims909</div>
+    <div style="position:fixed;bottom:6px;right:10px;font-size:9px;color:#C7C7CC;font-family:inherit;pointer-events:none;z-index:50;">smims909</div>
 
 
     <!-- Modal gestion autocomplete (clients / descriptions / lieux) -->
