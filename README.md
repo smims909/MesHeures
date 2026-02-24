@@ -1,6 +1,8 @@
 # **MesHeures**
 
-MesHeures est une application légère conçue pour les artisans et employés qui souhaitent simplifier la gestion de leurs feuilles d'heures hebdomadaires. L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine grâce à un outil mobile, rapide et 100% privé.
+MesHeures est une application légère conçue pour les artisans et employés qui souhaitent simplifier la gestion de leurs feuilles d'heures hebdomadaires. 
+
+L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine grâce à un outil mobile, rapide et 100% privé.
 
 ---
 
