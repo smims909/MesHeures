@@ -35,13 +35,15 @@ L'application a été pensée pour s'adapter à une multitude de profils :
 
 ## **Confidentialité et Sécurité**
 
-**Vos données restent sous votre contrôle exclusif.**
+**Une application Open Source et hyper-sécurisée par conception.**
 
-- **Zéro serveur** : Aucune donnée n’est envoyée vers l’extérieur.
-- **Stockage local** : Toutes les informations sont enregistrées uniquement sur votre appareil.
-- **Confidentialité totale** : Pas de compte, pas de profil, vous êtes le seul détenteur de vos relevés.
+- **Code Ouvert (Open Source)** : Le fonctionnement de l'application est transparent et vérifiable publiquement sur GitHub.
+- **Sécurité maximale** : Aucune donnée n’est envoyée vers l’extérieur. L'absence de serveur distant élimine tout risque de piratage ou de fuite de données sur le réseau.
+- **Stockage local exclusif** : Toutes les informations sont enregistrées uniquement dans la mémoire de votre appareil.
+- **Confidentialité totale** : Pas de compte, pas de profil, pas de mot de passe. Vous êtes le seul détenteur et lecteur de vos relevés.
 
-> **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, les données étant liées à la mémoire de votre téléphone.
+> **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, les données étant liées physiquement à la mémoire de votre téléphone.
+> 
 
 ---
 
