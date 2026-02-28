@@ -1,4 +1,5 @@
-# **MesHeures — Gestion de temps pour artisans**
+# MesHeures 
+Gestion de temps pour artisans
 
 **MesHeures** est une application légère conçue pour les artisans et employés (BTP, paysagistes, artisans locaux) qui souhaitent simplifier la gestion de leurs feuilles d'heures hebdomadaires. 
 
@@ -12,12 +13,12 @@ L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine gr�
 
 ---
 
-## **Fonctionnalités**
+## **Fonctionnalités principales**
 
 - **Saisie simplifiée** : Enregistrement des heures du matin et de l’après-midi par client ou chantier.
 - **Suivi des frais** : Gestion des kilomètres, repas et frais annexes.
-- **Exportation** : Génération de rapports aux formats **Excel (.xlsx)** et **PDF**.
-- **Performance** : Application ultra-légère (64 Ko) pour un affichage immédiat, même sur d'anciens téléphones.
+- **Exportation professionnelle** : Génération de rapports aux formats **Excel (.xlsx)** et **PDF**.
+- **Performance** : Application ultra-légère (64 Ko) pour un affichage immédiat.
 - **Mode hors-ligne** : Une fois chargée, l'application fonctionne sans aucune connexion internet (sous-sol, zones blanches).
 
 ---
@@ -41,6 +42,18 @@ MesHeures s'installe directement sur votre téléphone sans passer par un magasi
 1. Ouvrez le lien dans votre navigateur mobile.
 2. Sur **iPhone** : Appuyez sur **Partager** (le carré avec une flèche) et sélectionnez **Sur l’écran d’accueil**.
 3. Sur **Android** : Appuyez sur les **trois points** et sélectionnez **Ajouter à l’écran d’accueil**.
+
+---
+
+## **Gagnez du temps au quotidien**
+
+L'application intègre plusieurs automatismes pour simplifier votre saisie :
+
+- **Calcul automatique** : Le total de vos heures quotidiennes et hebdomadaires se calcule tout seul. Plus besoin de calculatrice.
+- **Mémorisation intelligente** : L'application retient vos chantiers et vos derniers réglages pour que la saisie suivante se fasse en quelques secondes.
+- **Exportation en 1 clic** : Vos rapports PDF et Excel sont mis en page proprement et prêts à être envoyés par e-mail ou WhatsApp.
+- **Démarrage instantané** : Grâce au mode hors-ligne, l'application s'ouvre sans attendre le chargement d'une page internet.
+- **Zéro maintenance** : Pas de compte à créer, pas de mot de passe à retenir. Vous ouvrez, vous notez, c'est fini.
 
 ---
 
