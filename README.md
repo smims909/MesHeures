@@ -1,9 +1,8 @@
-# MesHeures 
-Gestion de temps pour artisans
+# **MesHeures — Gestion de temps pour tous les professionnels**
 
-**MesHeures** est une application légère conçue pour les artisans et employés (BTP, paysagistes, artisans locaux) qui souhaitent simplifier la gestion de leurs feuilles d'heures hebdomadaires. 
+**MesHeures** est une application universelle de suivi d'activité conçue pour simplifier la vie de toute personne dont le travail repose sur un décompte d'heures, de missions ou de services.
 
-L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine grâce à un outil mobile, rapide et 100% privé.
+Que vous soyez sur un chantier, au domicile d'un client, en déplacement ou en télétravail, l'outil vous permet de remplacer vos relevés manuels par une solution numérique rapide, gratuite et 100% privée.
 
 ---
 
@@ -13,13 +12,24 @@ L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine gr�
 
 ---
 
+## **Une flexibilité totale par métier**
+
+L'application a été pensée pour s'adapter à une multitude de profils :
+
+- **Métiers de terrain & artisans** : Suivi par chantier, gestion des déplacements et des fournitures.
+- **Services à la personne** : Pointage précis des interventions (gardes, soins, aide à domicile).
+- **Indépendants & Freelances** : Relevé du temps passé par projet pour une facturation simplifiée.
+- **Activités de surveillance & gardiennage** : Historique clair des présences sur site.
+
+---
+
 ## **Fonctionnalités principales**
 
-- **Saisie simplifiée** : Enregistrement des heures du matin et de l’après-midi par client ou chantier.
-- **Suivi des frais** : Gestion des kilomètres, repas et frais annexes.
-- **Exportation professionnelle** : Génération de rapports aux formats **Excel (.xlsx)** et **PDF**.
-- **Performance** : Application ultra-légère (64 Ko) pour un affichage immédiat.
-- **Mode hors-ligne** : Une fois chargée, l'application fonctionne sans aucune connexion internet (sous-sol, zones blanches).
+- **Saisie universelle** : Enregistrement des heures par client, projet ou mission.
+- **Suivi des débours** : Gestion des kilomètres, des repas et des frais annexes.
+- **Exportation immédiate** : Génération de rapports aux formats **Excel (.xlsx)** et **PDF** prêts à être transmis.
+- **Performance** : Application ultra-légère (64 Ko) pour un accès instantané.
+- **Mode autonome** : Fonctionne sans aucune connexion internet après la première ouverture.
 
 ---
 
@@ -28,10 +38,10 @@ L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine gr�
 **Vos données restent sous votre contrôle exclusif.**
 
 - **Zéro serveur** : Aucune donnée n’est envoyée vers l’extérieur.
-- **Stockage local** : Toutes les informations sont enregistrées uniquement sur votre appareil (LocalStorage).
-- **Confidentialité totale** : Vous êtes le seul propriétaire et lecteur de vos données.
+- **Stockage local** : Toutes les informations sont enregistrées uniquement sur votre appareil.
+- **Confidentialité totale** : Pas de compte, pas de profil, vous êtes le seul détenteur de vos relevés.
 
-> **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, car les données sont liées à la mémoire de votre téléphone.
+> **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, les données étant liées à la mémoire de votre téléphone.
 
 ---
 
@@ -40,20 +50,17 @@ L'objectif est de supprimer la saisie manuelle fastidieuse en fin de semaine gr�
 MesHeures s'installe directement sur votre téléphone sans passer par un magasin d'applications :
 
 1. Ouvrez le lien dans votre navigateur mobile.
-2. Sur **iPhone** : Appuyez sur **Partager** (le carré avec une flèche) et sélectionnez **Sur l’écran d’accueil**.
+2. Sur **iPhone** : Appuyez sur **Partager** et sélectionnez **Sur l’écran d’accueil**.
 3. Sur **Android** : Appuyez sur les **trois points** et sélectionnez **Ajouter à l’écran d’accueil**.
 
 ---
 
-## **Gagnez du temps au quotidien**
+## **Automatismes et gain de temps**
 
-L'application intègre plusieurs automatismes pour simplifier votre saisie :
-
-- **Calcul automatique** : Le total de vos heures quotidiennes et hebdomadaires se calcule tout seul. Plus besoin de calculatrice.
-- **Mémorisation intelligente** : L'application retient vos chantiers et vos derniers réglages pour que la saisie suivante se fasse en quelques secondes.
-- **Exportation en 1 clic** : Vos rapports PDF et Excel sont mis en page proprement et prêts à être envoyés par e-mail ou WhatsApp.
-- **Démarrage instantané** : Grâce au mode hors-ligne, l'application s'ouvre sans attendre le chargement d'une page internet.
-- **Zéro maintenance** : Pas de compte à créer, pas de mot de passe à retenir. Vous ouvrez, vous notez, c'est fini.
+- **Calculs intégrés** : Totaux journaliers et hebdomadaires automatiques.
+- **Mémoire intelligente** : L'outil suggère vos intitulés habituels pour une saisie en quelques secondes.
+- **Mise en page pro** : Vos exports sont formatés pour être envoyés directement par WhatsApp ou e-mail.
+- **Zéro maintenance** : Pas de mot de passe, pas d'abonnement. L'outil est toujours opérationnel.
 
 ---
 
