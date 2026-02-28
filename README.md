@@ -43,7 +43,6 @@ L'application a été pensée pour s'adapter à une multitude de profils :
 - **Confidentialité totale** : Pas de compte, pas de profil, pas de mot de passe. Vous êtes le seul détenteur et lecteur de vos relevés.
 
 > **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, les données étant liées physiquement à la mémoire de votre téléphone.
-> 
 
 ---
 
@@ -52,7 +51,7 @@ L'application a été pensée pour s'adapter à une multitude de profils :
 MesHeures s'installe directement sur votre téléphone sans passer par un magasin d'applications :
 
 1. Ouvrez le lien dans votre navigateur mobile.
-2. Sur **iPhone** : Appuyez sur **Partager** et sélectionnez **Sur l’écran d’accueil**.
+2. Sur **iPhone** : Appuyez sur **Partager** (le carré avec une flèche) et sélectionnez **Sur l’écran d’accueil**.
 3. Sur **Android** : Appuyez sur les **trois points** et sélectionnez **Ajouter à l’écran d’accueil**.
 
 ---
