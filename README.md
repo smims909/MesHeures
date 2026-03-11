@@ -1,70 +1,119 @@
-# **MesHeures — Gestion de temps pour tous les professionnels**
+# ⏱ MesHeures — Gestion de temps simple, privée et universelle
 
-**MesHeures** est une application universelle de suivi d'activité conçue pour simplifier la vie de toute personne dont le travail repose sur un décompte d'heures, de missions ou de services.
+**MesHeures** est une application de suivi d’activité conçue pour simplifier la gestion du temps de travail de tous les professionnels.
 
-Que vous soyez sur un chantier, au domicile d'un client, en déplacement ou en télétravail, l'outil vous permet de remplacer vos relevés manuels par une solution numérique rapide, gratuite et 100% privée.
+Que vous soyez **sur un chantier, chez un client, en déplacement ou en télétravail**, MesHeures remplace les relevés manuels par une solution **numérique rapide, gratuite et 100 % privée**.
 
----
-
-## **Accéder à l’application**
-
-👉 **[https://smims909.github.io/MesHeures/](https://smims909.github.io/MesHeures/)**
-
+L'application fonctionne **directement sur votre appareil**, sans compte ni serveur externe.
 
 ---
 
-## **Installation (Mode Application)**
+# 🚀 Accéder à l’application
 
-MesHeures s'installe directement sur votre téléphone sans passer par un magasin d'applications :
-
-1. Ouvrez le lien dans votre navigateur mobile.
-2. Sur **iPhone** : Appuyez sur **Partager** (le carré avec une flèche) et sélectionnez **Sur l’écran d’accueil**.
-3. Sur **Android** : Appuyez sur les **trois points** et sélectionnez **Ajouter à l’écran d’accueil**.
+👉 **https://smims909.github.io/MesHeures/**
 
 ---
 
-## **Une flexibilité totale par métier**
+# 📱 Installation (Mode Application)
 
-L'application a été pensée pour s'adapter à une multitude de profils :
+MesHeures peut être installée sur votre téléphone comme une application, **sans passer par un App Store**.
 
-- **Métiers de terrain & artisans** : Suivi par chantier, gestion des déplacements et des fournitures.
-- **Services à la personne** : Pointage précis des interventions (gardes, soins, aide à domicile).
-- **Indépendants & Freelances** : Relevé du temps passé par projet pour une facturation simplifiée.
-- **Activités de surveillance & gardiennage** : Historique clair des présences sur site.
+### 1️⃣ Ouvrez le lien dans votre navigateur mobile
 
----
+### 📱 Sur iPhone
+1. Appuyez sur **Partager** (le carré avec une flèche)  
+2. Sélectionnez **Sur l’écran d’accueil**
 
-## **Fonctionnalités principales**
+### 🤖 Sur Android
+1. Appuyez sur les **trois points du navigateur**  
+2. Sélectionnez **Ajouter à l’écran d’accueil**
 
-- **Saisie universelle** : Enregistrement des heures par client, projet ou mission.
-- **Suivi des débours** : Gestion des kilomètres, des repas et des frais annexes.
-- **Exportation immédiate** : Génération de rapports aux formats **Excel (.xlsx)** et **PDF** prêts à être transmis.
-- **Performance** : Application ultra-légère (64 Ko) pour un accès instantané.
-- **Mode autonome** : Fonctionne sans aucune connexion internet après la première ouverture.
+L’application apparaîtra ensuite comme une **application classique sur votre téléphone**.
 
 ---
 
-## **Confidentialité et Sécurité**
+# 👷 Une application adaptée à de nombreux métiers
 
-**Une application Open Source et hyper-sécurisée par conception.**
+MesHeures s'adapte à une grande variété d’activités professionnelles :
 
-- **Code Ouvert (Open Source)** : Le fonctionnement de l'application est transparent et vérifiable publiquement sur GitHub.
-- **Sécurité maximale** : Aucune donnée n’est envoyée vers l’extérieur. L'absence de serveur distant élimine tout risque de piratage ou de fuite de données sur le réseau.
-- **Stockage local exclusif** : Toutes les informations sont enregistrées uniquement dans la mémoire de votre appareil.
-- **Confidentialité totale** : Pas de compte, pas de profil, pas de mot de passe. Vous êtes le seul détenteur et lecteur de vos relevés.
+### 🔧 Métiers de terrain & artisans
+Suivi des heures par **chantier**, gestion des **déplacements** et des **fournitures**.
 
-> **Important :** Pensez à exporter régulièrement vos rapports pour conserver une sauvegarde externe, les données étant liées physiquement à la mémoire de votre téléphone.
+### 🏠 Services à la personne
+Pointage précis des interventions : **gardes, soins, aide à domicile**.
 
+### 💼 Indépendants & freelances
+Suivi du temps par **projet** pour faciliter la **facturation**.
 
-## **Automatismes et gain de temps**
-
-- **Calculs intégrés** : Totaux journaliers et hebdomadaires automatiques.
-- **Mémoire intelligente** : L'outil suggère vos intitulés habituels pour une saisie en quelques secondes.
-- **Mise en page pro** : Vos exports sont formatés pour être envoyés directement par WhatsApp ou e-mail.
-- **Zéro maintenance** : Pas de mot de passe, pas d'abonnement. L'outil est toujours opérationnel.
+### 🛡 Surveillance & gardiennage
+Historique clair des **présences sur site** et des heures effectuées.
 
 ---
 
-## **Licence & Avertissement**
+# ⚙️ Fonctionnalités principales
 
-Ce projet est distribué sous licence MIT. L’application est fournie « en l’état ». L’auteur ne peut être tenu responsable d’une éventuelle perte de données en cas de suppression du cache du navigateur ou de perte de l'appareil.
+✔ **Saisie universelle**  
+Enregistrement des heures par **client, projet ou mission**.
+
+✔ **Gestion des frais**  
+Suivi des **kilomètres, repas et autres débours**.
+
+✔ **Exports professionnels**  
+Génération instantanée de rapports **Excel (.xlsx)** et **PDF** prêts à envoyer.
+
+✔ **Ultra-légère**  
+Application de seulement **64 Ko** pour un démarrage instantané.
+
+✔ **Mode hors ligne**  
+Fonctionne **sans connexion internet** après la première ouverture.
+
+---
+
+# 🔒 Confidentialité et sécurité
+
+MesHeures est conçue pour garantir **un niveau maximal de confidentialité**.
+
+### 🔓 Open Source
+Le code de l'application est **public et vérifiable sur GitHub**.
+
+### 🛡 Sécurité par conception
+- Aucun serveur externe  
+- Aucune transmission de données  
+- Aucun tracking  
+
+### 📱 Stockage local uniquement
+Toutes les informations restent **dans la mémoire de votre appareil**.
+
+### 🔐 Aucun compte requis
+- Pas d'inscription  
+- Pas de mot de passe  
+- Pas de profil utilisateur  
+
+Vous êtes **le seul détenteur de vos données**.
+
+> ⚠️ **Important :** Les données étant stockées uniquement sur votre appareil, pensez à **exporter régulièrement vos rapports** afin de conserver une sauvegarde externe.
+
+---
+
+# ⚡ Automatisation et gain de temps
+
+⏱ **Calculs automatiques**  
+Totaux journaliers et hebdomadaires générés automatiquement.
+
+🧠 **Mémoire intelligente**  
+L'application suggère vos **intitulés habituels** pour une saisie rapide.
+
+📄 **Exports prêts à envoyer**  
+Rapports formatés pour être transmis directement **par e-mail ou WhatsApp**.
+
+⚙️ **Zéro maintenance**  
+Pas de compte, pas d'abonnement, pas de configuration.
+
+---
+
+# 📄 Licence & avertissement
+
+Ce projet est distribué sous **licence MIT**.
+
+L’application est fournie **« en l’état »**.  
+L’auteur ne peut être tenu responsable d’une éventuelle **perte de données**, notamment en cas de suppression du cache du navigateur ou de perte de l’appareil.
