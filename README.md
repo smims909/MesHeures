@@ -8,7 +8,7 @@ L'application fonctionne directement sur votre appareil, sans compte, sans inscr
 
 ## 🚀 Accéder à l'application
 
-👉 **[Tester l'application](https://smims909.github.io/MesHeures/)**
+👉 **[Accédez à l'App](https://smims909.github.io/MesHeures/)**
 
 Aucune installation complexe : l'application fonctionne directement dans votre navigateur.
 
@@ -32,56 +32,39 @@ L'application apparaîtra ensuite comme une application classique sur votre tél
 
 ---
 
-## 📸 Aperçu
-
-**Vue semaine**
-![Vue semaine](screenshots/screenshot_accueil.jpg)
-
-**Saisie du jour**
-![Saisie du jour](screenshots/screenshot_jour.jpg)
-
-**Frais & pause**
-![Frais et pause](screenshots/screenshot_saisie.jpg)
-
-**Section frais ouverte**
-![Section frais](screenshots/screenshot_frais.jpg)
-
-**Export PDF**
-![Export PDF](screenshots/screenshot_export_pdf.jpg)
-
-**Export Excel**
-![Export Excel](screenshots/screenshot_export_excel.jpg)
-
----
-
 ## 👷 Une application adaptée à de nombreux métiers
 
 MesHeures s'adapte à une grande variété d'activités professionnelles, notamment celles qui nécessitent de suivre des interventions, des missions ou du temps passé chez des clients.
 
-| Secteur | Usage | Exemples |
-|---|---|---|
-| 🔧 Métiers de terrain & artisans | Heures par chantier, déplacements, matériel | Électriciens, plombiers, menuisiers, peintres |
-| 🛠 Techniciens & maintenance | Interventions chez clients, temps passé | Maintenance industrielle, informatique, climatisation |
-| 🏠 Services à domicile | Plusieurs clients dans la même journée | Aide à domicile, ménage, jardinage |
-| 🏥 Santé & accompagnement | Visites, soins, déplacements | Infirmiers, thérapeutes, accompagnement |
-| 🎓 Formation & coaching | Temps par cours, séance ou élève | Professeurs particuliers, formateurs, coachs |
-| 🚚 Transport & livraison | Tournées, horaires, kilomètres | Chauffeurs, livreurs, coursiers |
-| 🎥 Créatifs & freelances | Temps par projet client | Photographes, vidéastes, graphistes |
-| 🐾 Services aux animaux | Visites et interventions | Pet sitters, promeneurs, éducateurs canins |
-| 💼 Consultants & indépendants | Temps par mission, client ou projet | — |
-| 🛡 Surveillance & gardiennage | Présences sur site, heures effectuées | — |
+🔧 **Métiers de terrain & artisans** — Suivi des heures par chantier, gestion des déplacements, du matériel et des fournitures. Exemples : électriciens, plombiers, menuisiers, peintres, installateurs.
+
+🛠 **Techniciens & maintenance** — Historique des interventions chez les clients, du temps passé et des déplacements. Exemples : maintenance industrielle, informatique, climatisation, réparation.
+
+🏠 **Services à domicile** — Suivi des interventions chez plusieurs clients dans la même journée. Exemples : aide à domicile, ménage, jardinage, entretien.
+
+🏥 **Santé & accompagnement** — Gestion des visites, soins et déplacements pour les professionnels itinérants. Exemples : infirmiers, thérapeutes, accompagnement à domicile.
+
+🎓 **Formation & coaching** — Suivi du temps par cours, séance ou élève. Exemples : professeurs particuliers, formateurs, coachs sportifs.
+
+🚚 **Transport & livraison** — Gestion des tournées, horaires et kilomètres parcourus. Exemples : chauffeurs, livreurs, coursiers.
+
+🎥 **Créatifs & freelances** — Suivi du temps par projet client pour faciliter la facturation. Exemples : photographes, vidéastes, graphistes.
+
+🐾 **Services aux animaux** — Gestion des visites et interventions chez les clients. Exemples : pet sitters, promeneurs de chiens, éducateurs canins.
+
+💼 **Consultants & indépendants** — Suivi du temps par mission, client ou projet.
+
+🛡 **Surveillance & gardiennage** — Historique clair des présences sur site et des heures effectuées.
 
 ---
 
 ## ⚙️ Fonctionnalités principales
 
 - ✔ **Saisie universelle** — Enregistrement des heures par client, projet ou mission
-- ✔ **Gestion des frais** — Suivi des kilomètres (transport), repas et fournitures
-- ✔ **Pause déductible** — Pause configurable par jour, déduites automatiquement du total
-- ✔ **Exports professionnels** — Rapports Excel (.xlsx) et PDF prêts à envoyer, par semaine, mois ou client
-- ✔ **Mode sombre** — Interface claire ou sombre selon vos préférences
-- ✔ **Ultra-légère** — Fichier unique de moins de 100 Ko, démarrage instantané
-- ✔ **Mode hors ligne** — Fonctionne sans connexion après la première ouverture
+- ✔ **Gestion des frais** — Suivi des kilomètres, repas et autres débours
+- ✔ **Exports professionnels** — Génération instantanée de rapports Excel (.xlsx) et PDF prêts à être envoyés
+- ✔ **Ultra-légère** — Application de seulement 64 Ko pour un démarrage instantané
+- ✔ **Mode hors ligne** — Fonctionne sans connexion internet après la première ouverture
 
 ---
 
@@ -89,10 +72,12 @@ MesHeures s'adapte à une grande variété d'activités professionnelles, notamm
 
 MesHeures est conçue pour garantir un niveau maximal de confidentialité.
 
-- 🔓 **Open Source** — Le code est public et vérifiable sur GitHub
+- 🔓 **Open Source** — Le code de l'application est public et vérifiable sur GitHub
 - 🛡 **Sécurité par conception** — Aucun serveur externe, aucune transmission de données, aucun tracking
 - 📱 **Stockage local uniquement** — Toutes les informations restent dans la mémoire de votre appareil
-- 🔐 **Aucun compte requis** — Pas d'inscription, pas de mot de passe, pas de profil
+- 🔐 **Aucun compte requis** — Pas d'inscription, pas de mot de passe, pas de profil utilisateur
+
+Vous êtes le seul détenteur de vos données.
 
 > ⚠️ **Important :** Les données étant stockées uniquement sur votre appareil, pensez à exporter régulièrement vos rapports afin de conserver une sauvegarde externe.
 
@@ -100,9 +85,9 @@ MesHeures est conçue pour garantir un niveau maximal de confidentialité.
 
 ## ⚡ Automatisation et gain de temps
 
-- ⏱ **Calculs automatiques** — Totaux journaliers et hebdomadaires générés instantanément
+- ⏱ **Calculs automatiques** — Totaux journaliers et hebdomadaires générés automatiquement
 - 🧠 **Mémoire intelligente** — L'application suggère vos intitulés habituels pour une saisie rapide
-- 📄 **Exports prêts à envoyer** — Rapports formatés transmissibles directement par e-mail ou WhatsApp
+- 📄 **Exports prêts à envoyer** — Rapports formatés pour être transmis directement par e-mail ou WhatsApp
 - ⚙️ **Zéro maintenance** — Pas de compte, pas d'abonnement, pas de configuration
 
 ---
