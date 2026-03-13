@@ -8,7 +8,7 @@ L'application fonctionne directement sur votre appareil, sans compte, sans inscr
 
 ## 🚀 Accéder à l'application
 
-👉 **[Accédez à l'App] (https://smims909.github.io/MesHeures/)**
+👉 **Accédez à l'App https://smims909.github.io/MesHeures/**
 
 Aucune installation complexe : l'application fonctionne directement dans votre navigateur.
 
