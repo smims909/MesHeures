@@ -1,47 +1,28 @@
-# ⏱ MesHeures — Gestion du temps simple, privée et universelle
+# ⏱ MesHeures — Suivi du temps de travail simple et privé
 
-MesHeures est une application de suivi du temps de travail conçue pour simplifier la gestion des journées professionnelles. Que vous soyez sur un chantier, chez un client, en déplacement ou en télétravail, MesHeures remplace les relevés manuels par une solution numérique rapide, gratuite et 100 % privée.
+MesHeures est une application web légère permettant de suivre les heures de travail, les pauses, les frais et les notes quotidiennes.
 
-L'application fonctionne directement sur votre appareil, sans compte, sans inscription et sans serveur externe.
+Elle est conçue pour les travailleurs indépendants et professionnels de terrain souhaitant gérer leur activité simplement, sans dépendre d’un service externe.
+
+L’application fonctionne directement dans le navigateur, sans installation, sans compte et sans serveur.
 
 ---
 
 ## 🚀 Accéder à l'application
 
-👉 **[Tester l'application](https://smims909.github.io/MesHeures/)**
+👉 https://smims909.github.io/MesHeures/
 
-Aucune installation complexe : l'application fonctionne directement dans votre navigateur.
-
----
-
-## 💡 Fait pour ceux qui travaillent, pas pour ceux qui gèrent
-
-Vous rentrez d'une longue journée. Vous avez enchaîné les clients, les chantiers, les trajets.
-La dernière chose dont vous avez envie, c'est de reconstituer vos heures de mémoire.
-
-**MesHeures s'en souvient pour vous.**
-
-Ouvrez l'app, saisissez en quelques secondes, partagez le rapport directement depuis votre téléphone. C'est tout.
-
-> Idéal pour les artisans, indépendants et professionnels itinérants qui veulent garder le contrôle de leur temps — sans y passer du temps.
+Aucune installation requise. Fonctionne sur mobile et ordinateur.
 
 ---
 
-## 📱 Installation (mode application)
+## 🎯 Objectif
 
-MesHeures peut être installée sur votre téléphone comme une application native, sans passer par un App Store.
-
-**Ouvrez le lien dans votre navigateur mobile**
-
-📱 **Sur iPhone**
-- Appuyez sur **Partager** (le carré avec une flèche)
-- Sélectionnez **Sur l'écran d'accueil**
-
-🤖 **Sur Android**
-- Appuyez sur les **trois points** du navigateur
-- Sélectionnez **Ajouter à l'écran d'accueil**
-
-L'application apparaîtra ensuite comme une application classique sur votre téléphone.
+Permettre de :
+- suivre précisément ses heures de travail
+- garder une trace des journées et interventions
+- associer les données à des clients
+- faciliter la préparation des rapports et de la facturation
 
 ---
 
@@ -49,84 +30,90 @@ L'application apparaîtra ensuite comme une application classique sur votre tél
 
 | Fonctionnalité | Description |
 |---|---|
-| ✔ Saisie universelle | Enregistrement des heures par client, projet ou mission |
-| ✔ Gestion des frais | Transport, repas et fournitures dans une section unifiée |
-| ✔ Pause déductible | Déduite automatiquement du temps de travail |
-| ✔ Journal de mission | Notes par jour, associables à un client pour l'export |
-| ✔ Duplication intelligente | Copie la journée précédente en un tap |
-| ✔ Exports professionnels | PDF et Excel par semaine, mois ou client |
-| ✔ Mode sombre | Interface claire ou sombre |
-| ✔ Ultra-légère & hors ligne | Fonctionne sans connexion internet |
-| ✔ 100 % privée | Aucun compte, aucun serveur |
+| ✔ Saisie des heures | Une ou plusieurs plages horaires par jour |
+| ✔ Gestion des pauses | Déduction automatique du temps de travail |
+| ✔ Frais et repas | Transport, repas et fournitures avec attribution client |
+| ✔ Journal de mission | Notes multiples par jour, associables à un client |
+| ✔ Duplication de journée | Reprise rapide du jour précédent |
+| ✔ Exports | PDF et Excel (semaine, mois, client) |
+| ✔ Fonctionnement hors ligne | Utilisable sans connexion |
+| ✔ Stockage local | Données conservées sur l’appareil |
+| ✔ Sans compte | Aucun enregistrement ni inscription |
 
 ---
 
-## 🆕 Nouveautés v1.2
+## 👷 Public cible
 
-### Journal de mission
-Notes multiples par journée, chacune associable à un client différent pour un export propre par client.
+MesHeures est adapté aux activités suivantes :
 
-### Duplication de journée
-Duplique en un tap les clients, horaires, pause, repas et notes du jour précédent. Les frais restent vides pour éviter les doublons comptables.
-
-### Taux horaire
-Saisie optionnelle d'un taux CHF/h. Le total estimé s'affiche dans le footer (indicatif uniquement, absent des exports).
-
-### Toggle période
-Le footer est cliquable pour basculer entre les totaux de la semaine et ceux du mois.
-
-### Interface unifiée — Pause / Frais / Journal
-Les trois sections partagent le même bandeau déroulant. Frais intègre désormais le repas avec la même structure que Transport et Fournitures.
-
-### Devise repas
-Un tap sur CHF bascule vers € ou $. Mémorisé pour les prochaines saisies.
-
-### Mémoire automatique
-Le montant du repas, les minutes de pause et le taux horaire sont mémorisés et pré-remplis sur les nouvelles semaines.
+- Artisans (peintres, paysagistes, installateurs)
+- Techniciens et maintenance
+- Services à domicile
+- Freelances et indépendants
+- Consultants et métiers itinérants
 
 ---
 
-## 👷 Une application adaptée à de nombreux métiers
+## 📱 Installation (optionnelle)
 
-| Métier | Usage |
-|---|---|
-| 🔧 Artisans & terrain | Heures par chantier, déplacements, matériel |
-| 🛠 Techniciens & maintenance | Interventions clients, temps, déplacements |
-| 🏠 Services à domicile | Plusieurs clients dans la même journée |
-| 🏥 Santé & accompagnement | Visites, soins, déplacements itinérants |
-| 🎓 Formation & coaching | Temps par cours, séance ou élève |
-| 🚚 Transport & livraison | Tournées, horaires, kilomètres |
-| 🎥 Créatifs & freelances | Temps par projet client, facturation |
-| 🐾 Services aux animaux | Visites et interventions chez les clients |
-| 💼 Consultants | Temps par mission, client ou projet |
-| 🛡 Surveillance & gardiennage | Présences sur site et heures effectuées |
+L’application peut être ajoutée à l’écran d’accueil pour un usage similaire à une application mobile.
+
+**iPhone :**
+- Bouton *Partager*
+- Ajouter à l’écran d’accueil
+
+**Android :**
+- Menu navigateur (⋮)
+- Ajouter à l’écran d’accueil
 
 ---
 
-## 🔒 Confidentialité et sécurité
+## 🔁 Fonctionnement général
 
-- 🔓 **Open Source** — Code public et vérifiable sur GitHub
-- 🛡 **Sécurité par conception** — Aucun serveur externe, aucune transmission de données, aucun tracking
-- 📱 **Stockage local uniquement** — Toutes les données restent sur votre appareil
-- 🔐 **Aucun compte requis** — Pas d'inscription, pas de mot de passe, pas de profil
-
-Vous êtes le seul détenteur de vos données.
-
-> ⚠️ **Important :** Les données étant stockées uniquement sur votre appareil, pensez à exporter régulièrement vos rapports afin de conserver une sauvegarde externe.
+- Sauvegarde automatique des données
+- Restauration après rechargement
+- Calculs automatiques des totaux
+- Exports générés à partir des données internes
 
 ---
 
-## ⚡ Automatisation et gain de temps
+## 🆕 Évolutions récentes (v1.2)
 
-- ⏱ **Calculs automatiques** — Totaux journaliers et hebdomadaires générés automatiquement
-- 🧠 **Mémoire intelligente** — Suggestions des intitulés habituels pour une saisie rapide
-- 📄 **Exports prêts à envoyer** — Rapports formatés pour e-mail ou WhatsApp
-- ⚙️ **Zéro maintenance** — Pas de compte, pas d'abonnement, pas de configuration
+- Notes multiples par journée (journal de mission)
+- Duplication complète d’une journée (heures, pause, repas, notes)
+- Gestion unifiée des frais (transport, repas, fournitures)
+- Mémoire automatique des valeurs (repas, pause, taux)
+- Sélecteur de devise (CHF, €, $)
+- Affichage des totaux semaine / mois
 
 ---
 
-## 📄 Licence & avertissement
+## 📊 Exports
 
-Ce projet est distribué sous licence **MIT**.
+L’application permet de générer :
 
-L'application est fournie « en l'état ». L'auteur ne peut être tenu responsable d'une éventuelle perte de données, notamment en cas de suppression du cache du navigateur ou de perte de l'appareil.
+- PDF hebdomadaire avec totaux
+- Export Excel
+- Export par client (heures, repas, notes)
+
+---
+
+## 🔒 Confidentialité
+
+- Aucune donnée envoyée sur un serveur
+- Aucune collecte d’information
+- Stockage local uniquement
+- Aucun compte requis
+
+Les données restent entièrement sur votre appareil.
+
+> ⚠️ Il est recommandé d’exporter régulièrement vos données pour conserver une sauvegarde externe.
+
+---
+
+## ⚡ Points techniques
+
+- Application en fichier unique (HTML)
+- Fonctionne sans backend
+- Données structurées (heures, repas, notes)
+- Architecture :
