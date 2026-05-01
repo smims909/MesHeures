@@ -116,4 +116,14 @@ Les données restent entièrement sur votre appareil.
 - Application en fichier unique (HTML)
 - Fonctionne sans backend
 - Données structurées (heures, repas, notes)
-- Architecture :
+- Architecture : DOM → lecture → données → calcul → export
+- Exports générés à partir des données internes (pas du DOM)
+
+---
+
+## 📄 Licence
+
+Licence MIT
+
+L’application est fournie « en l’état », sans garantie.  
+L’auteur ne peut être tenu responsable en cas de perte de données.
